@@ -28,6 +28,9 @@
 #include "platform/ios/JavaScriptObjCBridge.h"
 #endif
 
+#include "js_bindings_channel.hpp"
+#include "GameBaseScene.h"
+
 USING_NS_CC;
 using namespace CocosDenshion;
 
@@ -56,14 +59,17 @@ bool AppDelegate::applicationDidFinishLaunching()
 #if(CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
         glview = cocos2d::GLViewImpl::create("demo");
 #else
-        glview = cocos2d::GLViewImpl::createWithRect("demo", Rect(0,0,900,640));
+        glview = cocos2d::GLViewImpl::createWithRect("demo", Rect(0,0,1136,640));
 #endif
         director->setOpenGLView(glview);
 }
 
+    // set design resolution
+    glview->setDesignResolutionSize(1136, 640, ResolutionPolicy::FIXED_HEIGHT);
+    
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
-    
+
     ScriptingCore* sc = ScriptingCore::getInstance();
     sc->addRegisterCallback(register_all_cocos2dx);
     sc->addRegisterCallback(register_cocos2dx_js_core);
@@ -108,11 +114,14 @@ bool AppDelegate::applicationDidFinishLaunching()
     // 3d extension can be commented out to reduce the package
     sc->addRegisterCallback(register_all_cocos2dx_3d_extension);
     
+    sc->addRegisterCallback(register_all_js_bindings_channel);
+    
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     sc->addRegisterCallback(JavascriptJavaBridge::_js_register);
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     sc->addRegisterCallback(JavaScriptObjCBridge::_js_register);
 #endif
+
     sc->start();    
     sc->runScript("script/jsb_boot.js");
 #if defined(COCOS2D_DEBUG) && (COCOS2D_DEBUG > 0)
@@ -122,6 +131,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
     ScriptingCore::getInstance()->runScript("main.js");
 
+//    director->runWithScene(GameBaseScene::createScene());
     return true;
 }
 
