@@ -1,0 +1,13 @@
+project.xcworkspace
+
+*.xcuserstate
+
+*.xcworkspacedata
+
+xcuserdata
+
+cocos2d-js-v3.6
+
+proj.android
+
+proj.win32
