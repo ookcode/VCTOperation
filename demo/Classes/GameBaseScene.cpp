@@ -8,6 +8,10 @@
 
 #include "GameBaseScene.h"
 #include "VCTChannel.h"
+#include "ScriptingCore.h"
+#include "ui/CocosGUI.h"
+using namespace ui;
+
 Scene* GameBaseScene::createScene()
 {
     auto scene = Scene::create();
@@ -25,5 +29,17 @@ bool GameBaseScene::init()
     {
         log("response : %s",args.c_str());
     });
+    Size winSize = Director::getInstance()->getWinSize();
+    Text* text = Text::create("touch to run js scene", "", 36);
+    text->setTouchEnabled(true);
+    text->setPosition(winSize / 2);
+    text->addTouchEventListener([](Ref *,Widget::TouchEventType type)
+    {
+        if (Widget::TouchEventType::ENDED != type) return ;
+        ScriptEngineProtocol *engine = ScriptingCore::getInstance();
+        ScriptEngineManager::getInstance()->setScriptEngine(engine);
+        ScriptingCore::getInstance()->runScript("main.js");
+    });
+    this->addChild(text);
     return true;
 }
