@@ -31,6 +31,8 @@
 #import "RootViewController.h"
 #import "platform/ios/CCEAGLView-ios.h"
 
+#import "VCTModuleExport.h"
+
 @implementation AppController
 
 #pragma mark -
@@ -77,6 +79,10 @@ static AppDelegate s_sharedApplication;
 
     [[UIApplication sharedApplication] setStatusBarHidden: YES];
 
+    VCTManager *manager = [VCTManager instance];
+    VCTAlertModule *alert = [[VCTAlertModule alloc] init];
+    [manager registerModule:alert];
+    
     // IMPORTANT: Setting the GLView should be done after creating the RootViewController
     cocos2d::GLView *glview = cocos2d::GLViewImpl::createWithEAGLView(eaglView);
     cocos2d::Director::getInstance()->setOpenGLView(glview);

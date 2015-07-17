@@ -68,6 +68,17 @@
 		BF3235BF1B560F7B00FF93F8 /* libjsbindings Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3235A11B560DB200FF93F8 /* libjsbindings Mac.a */; };
 		BF3235C91B56521800FF93F8 /* GameBaseScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3235C71B56521800FF93F8 /* GameBaseScene.cpp */; };
 		BF3235CA1B56521800FF93F8 /* GameBaseScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3235C71B56521800FF93F8 /* GameBaseScene.cpp */; };
+		BF7F59701B58B675001E885D /* VCTCPP2OC.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF7F595F1B58B675001E885D /* VCTCPP2OC.mm */; };
+		BF7F59711B58B675001E885D /* VCTCPP2OC.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF7F595F1B58B675001E885D /* VCTCPP2OC.mm */; };
+		BF7F59721B58B675001E885D /* VCTOC2CPP.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF7F59611B58B675001E885D /* VCTOC2CPP.mm */; };
+		BF7F59731B58B675001E885D /* VCTOC2CPP.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF7F59611B58B675001E885D /* VCTOC2CPP.mm */; };
+		BF7F59741B58B675001E885D /* VCTAlertModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7F59651B58B675001E885D /* VCTAlertModule.m */; };
+		BF7F59761B58B675001E885D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7F59691B58B675001E885D /* JSONKit.m */; };
+		BF7F59771B58B675001E885D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7F59691B58B675001E885D /* JSONKit.m */; };
+		BF7F59781B58B675001E885D /* VCTManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7F596B1B58B675001E885D /* VCTManager.m */; };
+		BF7F59791B58B675001E885D /* VCTManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7F596B1B58B675001E885D /* VCTManager.m */; };
+		BF7F597A1B58B675001E885D /* VCTModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7F596D1B58B675001E885D /* VCTModule.m */; };
+		BF7F597B1B58B675001E885D /* VCTModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7F596D1B58B675001E885D /* VCTModule.m */; };
 		BFDDCDFA1B5784B400C5DBBC /* js_bindings_channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDDCDF61B5784B400C5DBBC /* js_bindings_channel.cpp */; };
 		BFDDCDFB1B5784B400C5DBBC /* js_bindings_channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDDCDF61B5784B400C5DBBC /* js_bindings_channel.cpp */; };
 		BFDDCDFC1B5784B400C5DBBC /* VCTChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDDCDF81B5784B400C5DBBC /* VCTChannel.cpp */; };
@@ -165,6 +176,20 @@
 		BF3235B71B560EC700FF93F8 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../Document/src; sourceTree = "<group>"; };
 		BF3235C71B56521800FF93F8 /* GameBaseScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameBaseScene.cpp; sourceTree = "<group>"; };
 		BF3235C81B56521800FF93F8 /* GameBaseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBaseScene.h; sourceTree = "<group>"; };
+		BF7F595E1B58B675001E885D /* VCTCPP2OC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTCPP2OC.h; sourceTree = "<group>"; };
+		BF7F595F1B58B675001E885D /* VCTCPP2OC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VCTCPP2OC.mm; sourceTree = "<group>"; };
+		BF7F59601B58B675001E885D /* VCTOC2CPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTOC2CPP.h; sourceTree = "<group>"; };
+		BF7F59611B58B675001E885D /* VCTOC2CPP.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VCTOC2CPP.mm; sourceTree = "<group>"; };
+		BF7F59641B58B675001E885D /* VCTAlertModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTAlertModule.h; sourceTree = "<group>"; };
+		BF7F59651B58B675001E885D /* VCTAlertModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCTAlertModule.m; sourceTree = "<group>"; };
+		BF7F59681B58B675001E885D /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		BF7F59691B58B675001E885D /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		BF7F596A1B58B675001E885D /* VCTManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTManager.h; sourceTree = "<group>"; };
+		BF7F596B1B58B675001E885D /* VCTManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCTManager.m; sourceTree = "<group>"; };
+		BF7F596C1B58B675001E885D /* VCTModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTModule.h; sourceTree = "<group>"; };
+		BF7F596D1B58B675001E885D /* VCTModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCTModule.m; sourceTree = "<group>"; };
+		BF7F596E1B58B675001E885D /* VCTModuleExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTModuleExport.h; sourceTree = "<group>"; };
+		BF7F596F1B58B675001E885D /* VCTUtilityMarco.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTUtilityMarco.h; sourceTree = "<group>"; };
 		BFDDCDF61B5784B400C5DBBC /* js_bindings_channel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = js_bindings_channel.cpp; sourceTree = "<group>"; };
 		BFDDCDF71B5784B400C5DBBC /* js_bindings_channel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = js_bindings_channel.hpp; sourceTree = "<group>"; };
 		BFDDCDF81B5784B400C5DBBC /* VCTChannel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VCTChannel.cpp; sourceTree = "<group>"; };
@@ -336,10 +361,72 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		BF7F595C1B58B675001E885D /* platform_ios */ = {
+			isa = PBXGroup;
+			children = (
+				BF7F595D1B58B675001E885D /* bridge */,
+				BF7F59621B58B675001E885D /* module */,
+				BF7F59661B58B675001E885D /* utility */,
+				BF7F596A1B58B675001E885D /* VCTManager.h */,
+				BF7F596B1B58B675001E885D /* VCTManager.m */,
+				BF7F596C1B58B675001E885D /* VCTModule.h */,
+				BF7F596D1B58B675001E885D /* VCTModule.m */,
+				BF7F596E1B58B675001E885D /* VCTModuleExport.h */,
+				BF7F596F1B58B675001E885D /* VCTUtilityMarco.h */,
+			);
+			path = platform_ios;
+			sourceTree = "<group>";
+		};
+		BF7F595D1B58B675001E885D /* bridge */ = {
+			isa = PBXGroup;
+			children = (
+				BF7F595E1B58B675001E885D /* VCTCPP2OC.h */,
+				BF7F595F1B58B675001E885D /* VCTCPP2OC.mm */,
+				BF7F59601B58B675001E885D /* VCTOC2CPP.h */,
+				BF7F59611B58B675001E885D /* VCTOC2CPP.mm */,
+			);
+			path = bridge;
+			sourceTree = "<group>";
+		};
+		BF7F59621B58B675001E885D /* module */ = {
+			isa = PBXGroup;
+			children = (
+				BF7F59631B58B675001E885D /* alertmodule */,
+			);
+			path = module;
+			sourceTree = "<group>";
+		};
+		BF7F59631B58B675001E885D /* alertmodule */ = {
+			isa = PBXGroup;
+			children = (
+				BF7F59641B58B675001E885D /* VCTAlertModule.h */,
+				BF7F59651B58B675001E885D /* VCTAlertModule.m */,
+			);
+			path = alertmodule;
+			sourceTree = "<group>";
+		};
+		BF7F59661B58B675001E885D /* utility */ = {
+			isa = PBXGroup;
+			children = (
+				BF7F59671B58B675001E885D /* JSONKit */,
+			);
+			path = utility;
+			sourceTree = "<group>";
+		};
+		BF7F59671B58B675001E885D /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				BF7F59681B58B675001E885D /* JSONKit.h */,
+				BF7F59691B58B675001E885D /* JSONKit.m */,
+			);
+			path = JSONKit;
+			sourceTree = "<group>";
+		};
 		BFDDCDF41B5784B400C5DBBC /* vct-operation */ = {
 			isa = PBXGroup;
 			children = (
 				BFDDCDF51B5784B400C5DBBC /* channel */,
+				BF7F595C1B58B675001E885D /* platform_ios */,
 			);
 			name = "vct-operation";
 			path = "../../vct-operation";
@@ -539,8 +626,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF7F59711B58B675001E885D /* VCTCPP2OC.mm in Sources */,
+				BF7F59791B58B675001E885D /* VCTManager.m in Sources */,
 				509D4A8117EBB24E00697056 /* AppDelegate.cpp in Sources */,
+				BF7F597B1B58B675001E885D /* VCTModule.m in Sources */,
+				BF7F59771B58B675001E885D /* JSONKit.m in Sources */,
 				BF3235CA1B56521800FF93F8 /* GameBaseScene.cpp in Sources */,
+				BF7F59731B58B675001E885D /* VCTOC2CPP.mm in Sources */,
 				BFDDCDFD1B5784B400C5DBBC /* VCTChannel.cpp in Sources */,
 				BFDDCDFB1B5784B400C5DBBC /* js_bindings_channel.cpp in Sources */,
 				C06E23CC18CEFE680093C81A /* main.cpp in Sources */,
@@ -551,13 +643,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF7F59741B58B675001E885D /* VCTAlertModule.m in Sources */,
+				BF7F59701B58B675001E885D /* VCTCPP2OC.mm in Sources */,
 				BFDDCDFA1B5784B400C5DBBC /* js_bindings_channel.cpp in Sources */,
+				BF7F59781B58B675001E885D /* VCTManager.m in Sources */,
+				BF7F597A1B58B675001E885D /* VCTModule.m in Sources */,
 				509D4AC917EBB2AB00697056 /* RootViewController.mm in Sources */,
 				BFDDCDFC1B5784B400C5DBBC /* VCTChannel.cpp in Sources */,
+				BF7F59721B58B675001E885D /* VCTOC2CPP.mm in Sources */,
 				D4545227156E28EF00887EB5 /* AppDelegate.cpp in Sources */,
 				509D4AC817EBB2AB00697056 /* main.m in Sources */,
 				509D4ABC17EBB2AB00697056 /* AppController.mm in Sources */,
 				BF3235C91B56521800FF93F8 /* GameBaseScene.cpp in Sources */,
+				BF7F59761B58B675001E885D /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

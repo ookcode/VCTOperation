@@ -64,10 +64,16 @@ var HelloWorldLayer = cc.Layer.extend({
                 cc.tintTo(2.5,255,125,0)
             )
         );
-         VCT.Channel.Request("a","b","c",function(args)
-         {
-             cc.log(args);
-         });
+
+        var param = {
+            "title" : "Welcome",
+            "message" : "this is a js scene",
+            "leftbtn" : "Ok"
+        };
+        VCT.Channel.Request("alertmodule","show",JSON.stringify(param),function(args)
+        {
+            cc.log(args);
+        });
         return true;
     }
 });

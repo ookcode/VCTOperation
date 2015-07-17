@@ -11,9 +11,9 @@
 using namespace cocos2d;
 
 #include "ScriptingCore.h"
-/*
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#include "VCTOCAdapter.h"
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+#include "VCTCPP2OC.h"
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #include <jni.h>
 #include "platform/android/jni/JniHelper.h"
@@ -28,15 +28,43 @@ extern"C"
     }
 }
 #endif
-*/
+
 namespace VCT
 {
     std::map<std::string, CPP_CALLBACK> Channel::CPP_CALLBACK_MAP;
     std::map<std::string, JS_CALLBACK> Channel::JS_CALLBACK_MAP;
     std::string ExecRequest(const std::string &moduleName, const std::string &methodName, const std::string &args, const std::string &address)
     {
-        VCT::Channel::Response("test response", address);
         std::string returnvalue("");
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+            returnvalue = VCTCPP2OC::Request(moduleName, methodName, args, address);
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        JniMethodInfo minfo;
+        const char * package = "com/vincent/cocos2dx/VCTChannel";
+        const char * param = "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;";
+        bool exist = JniHelper::getStaticMethodInfo(minfo, package,"Request",param);
+        if (exist) {
+            //创建参数
+            jstring jmodule = minfo.env->NewStringUTF(moduleName.c_str());
+            jstring jmethod = minfo.env->NewStringUTF(methodName.c_str());
+            jstring jparam = minfo.env->NewStringUTF(args.c_str());
+            jstring jcallback = minfo.env->NewStringUTF(cbaddress.c_str());
+            //调用java静态函数
+            jstring result = (jstring)minfo.env->CallStaticObjectMethod(minfo.classID, minfo.methodID,jmodule,jmethod,jparam,jcallback);
+            if (result != NULL) {
+                returnvalue = JniHelper::jstring2string(result);
+            }
+            //释放参数
+            minfo.env->DeleteLocalRef(jmodule);
+            minfo.env->DeleteLocalRef(jmethod);
+            minfo.env->DeleteLocalRef(jparam);
+            minfo.env->DeleteLocalRef(jcallback);
+        }else {
+            //函数不存在
+            __android_log_print(ANDROID_LOG_INFO, "JNIMsg", "static method 'RequestChannel' not found");
+            return "-1";
+        }
+#endif
         return returnvalue;
     }
 
