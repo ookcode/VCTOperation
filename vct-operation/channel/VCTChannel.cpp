@@ -48,7 +48,7 @@ namespace VCT
             jstring jmodule = minfo.env->NewStringUTF(moduleName.c_str());
             jstring jmethod = minfo.env->NewStringUTF(methodName.c_str());
             jstring jparam = minfo.env->NewStringUTF(args.c_str());
-            jstring jcallback = minfo.env->NewStringUTF(cbaddress.c_str());
+            jstring jcallback = minfo.env->NewStringUTF(address.c_str());
             //调用java静态函数
             jstring result = (jstring)minfo.env->CallStaticObjectMethod(minfo.classID, minfo.methodID,jmodule,jmethod,jparam,jcallback);
             if (result != NULL) {
@@ -61,8 +61,8 @@ namespace VCT
             minfo.env->DeleteLocalRef(jcallback);
         }else {
             //函数不存在
-            __android_log_print(ANDROID_LOG_INFO, "JNIMsg", "static method 'RequestChannel' not found");
-            return "-1";
+            __android_log_print(ANDROID_LOG_INFO, "JNIMsg", "static method 'Request' not found");
+            return "0";
         }
 #endif
         return returnvalue;

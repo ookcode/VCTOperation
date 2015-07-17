@@ -34,7 +34,7 @@ create_impl(VCTManager)
     VCTModule *module = [moduleDic_ objectForKey:moduleName];
     if (!module) {
         NSLog(@"module '%@' not found",moduleName);
-        return @"-1";
+        return @"0";
     }
     NSString *result = [module executeMethodWithName:methodName Param:param Callback:callback];
     return result;

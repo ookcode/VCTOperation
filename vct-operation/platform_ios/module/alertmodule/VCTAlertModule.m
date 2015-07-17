@@ -39,9 +39,13 @@ callback:
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[paramDic objectForKey:@"title"]
                                                     message:[paramDic objectForKey:@"message"]
                                                    delegate:self
-                                          cancelButtonTitle:left.length==0?nil:left
-                                          otherButtonTitles:right.length==0?nil:right, nil];
-    [alert show];
+                                          cancelButtonTitle:left
+                                          otherButtonTitles:right, nil];
+    if (left != nil || right != nil)
+    {
+        [alert show];
+    }
+    
     [alert release];
     return @"1";
 }

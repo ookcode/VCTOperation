@@ -15,13 +15,13 @@ std::string VCTCPP2OC::Request(const std::string& moduleName, const std::string&
     NSString *method = [NSString stringWithUTF8String:methodName.c_str()];
     NSString *param = [NSString stringWithUTF8String:args.c_str()];
     NSString *cb = [NSString stringWithUTF8String:cbaddress.c_str()];
-    NSString *returnvalue = [[VCTManager instance] requestWithModuleName:module MethodName:method Param:param Callback:cb];
-    NSLog(@"**************Request");
+    NSLog(@"**************Request**************");
     NSLog(@"module = %@",module);
     NSLog(@"method = %@",method);
     NSLog(@"param = %@",param);
     NSLog(@"cbaddress = %@",cb.length==0?@"\"\"":cb);
+    NSLog(@"***********************************");
+    NSString *returnvalue = [[VCTManager instance] requestWithModuleName:module MethodName:method Param:param Callback:cb];
     NSLog(@"return = %@",returnvalue);
-    NSLog(@"*********************");
     return returnvalue.UTF8String;
 }

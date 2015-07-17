@@ -26,17 +26,27 @@ THE SOFTWARE.
 ****************************************************************************/
 package org.cocos2dx.javascript;
 
-import org.cocos2dx.lib.Cocos2dxActivity;
+//import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
-public class AppActivity extends Cocos2dxActivity {
+import Manager.VCTManager;
+
+import alertmodule.VCTAlertModule;
+
+import com.vincent.cocos2dx.VCTChannel;
+
+public class AppActivity extends VCTChannel {
 	
     @Override
     public Cocos2dxGLSurfaceView onCreateView() {
         Cocos2dxGLSurfaceView glSurfaceView = new Cocos2dxGLSurfaceView(this);
         // TestCpp should create stencil buffer
         glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8);
-
+        
+        VCTManager manager = VCTManager.getInstance();
+        VCTAlertModule alert = new VCTAlertModule(this);
+        manager.RegisterModule(alert);
+        
         return glSurfaceView;
     }
 }

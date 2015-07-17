@@ -50,12 +50,19 @@
                               Param:(NSString *)param
                            Callback:(NSString *)callback {
     VCTMethodContainer *container = [self.methodDic objectForKey:methodName];
-    SEL method = container.method;
-    if ([self respondsToSelector:method]) {
-        NSString *result = [self performSelector:method withObject:param withObject:callback];
-        return result;
-    }
-    return @"-1";
+    do {
+        if (!container) {
+            break;
+        }
+        SEL method = container.method;
+        if ([self respondsToSelector:method]) {
+            NSString *result = [self performSelector:method withObject:param withObject:callback];
+            return result;
+        }
+        
+    } while (0);
+    NSLog(@"method '%@' not found",methodName);
+    return @"0";
 }
 
 @end
