@@ -8,7 +8,22 @@ xcuserdata
 
 cocos2d-js-v3.6
 
-proj.android
-
 proj.win32
+
+.settings
+
+obj
+
+libs
+
+bin
+
+assets
+
+.project
+
+.cproject
+
+.classpath
+
 *.apk
