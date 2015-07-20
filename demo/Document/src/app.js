@@ -7,6 +7,10 @@ var HelloWorldLayer = cc.Layer.extend({
 
         var winSize = cc.winSize;
 
+        var bg = new cc.Sprite(res.HelloWorld_png);
+        bg.setPosition(winSize.width / 2,winSize.height / 2);
+        this.addChild(bg);
+
         {
             var text = new ccui.Text("show alert", "Marker Felt.ttf", 28);
             text.setTouchEnabled(true);
