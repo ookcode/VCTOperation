@@ -79,6 +79,8 @@
 		BF7F59791B58B675001E885D /* VCTManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7F596B1B58B675001E885D /* VCTManager.m */; };
 		BF7F597A1B58B675001E885D /* VCTModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7F596D1B58B675001E885D /* VCTModule.m */; };
 		BF7F597B1B58B675001E885D /* VCTModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7F596D1B58B675001E885D /* VCTModule.m */; };
+		BFC1E3381B5CE67300D6345D /* VCTHandleModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC1E3371B5CE67300D6345D /* VCTHandleModule.m */; };
+		BFC1E3391B5CE67300D6345D /* VCTHandleModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC1E3371B5CE67300D6345D /* VCTHandleModule.m */; };
 		BFDDCDFA1B5784B400C5DBBC /* js_bindings_channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDDCDF61B5784B400C5DBBC /* js_bindings_channel.cpp */; };
 		BFDDCDFB1B5784B400C5DBBC /* js_bindings_channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDDCDF61B5784B400C5DBBC /* js_bindings_channel.cpp */; };
 		BFDDCDFC1B5784B400C5DBBC /* VCTChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDDCDF81B5784B400C5DBBC /* VCTChannel.cpp */; };
@@ -190,6 +192,8 @@
 		BF7F596D1B58B675001E885D /* VCTModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCTModule.m; sourceTree = "<group>"; };
 		BF7F596E1B58B675001E885D /* VCTModuleExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTModuleExport.h; sourceTree = "<group>"; };
 		BF7F596F1B58B675001E885D /* VCTUtilityMarco.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTUtilityMarco.h; sourceTree = "<group>"; };
+		BFC1E3361B5CE67300D6345D /* VCTHandleModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTHandleModule.h; sourceTree = "<group>"; };
+		BFC1E3371B5CE67300D6345D /* VCTHandleModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCTHandleModule.m; sourceTree = "<group>"; };
 		BFDDCDF61B5784B400C5DBBC /* js_bindings_channel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = js_bindings_channel.cpp; sourceTree = "<group>"; };
 		BFDDCDF71B5784B400C5DBBC /* js_bindings_channel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = js_bindings_channel.hpp; sourceTree = "<group>"; };
 		BFDDCDF81B5784B400C5DBBC /* VCTChannel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VCTChannel.cpp; sourceTree = "<group>"; };
@@ -391,6 +395,7 @@
 		BF7F59621B58B675001E885D /* module */ = {
 			isa = PBXGroup;
 			children = (
+				BFC1E3311B5CE65E00D6345D /* handlemodule */,
 				BF7F59631B58B675001E885D /* alertmodule */,
 			);
 			path = module;
@@ -420,6 +425,16 @@
 				BF7F59691B58B675001E885D /* JSONKit.m */,
 			);
 			path = JSONKit;
+			sourceTree = "<group>";
+		};
+		BFC1E3311B5CE65E00D6345D /* handlemodule */ = {
+			isa = PBXGroup;
+			children = (
+				BFC1E3361B5CE67300D6345D /* VCTHandleModule.h */,
+				BFC1E3371B5CE67300D6345D /* VCTHandleModule.m */,
+			);
+			name = handlemodule;
+			path = runscenemodule;
 			sourceTree = "<group>";
 		};
 		BFDDCDF41B5784B400C5DBBC /* vct-operation */ = {
@@ -632,6 +647,7 @@
 				BF7F597B1B58B675001E885D /* VCTModule.m in Sources */,
 				BF7F59771B58B675001E885D /* JSONKit.m in Sources */,
 				BF3235CA1B56521800FF93F8 /* GameBaseScene.cpp in Sources */,
+				BFC1E3391B5CE67300D6345D /* VCTHandleModule.m in Sources */,
 				BF7F59731B58B675001E885D /* VCTOC2CPP.mm in Sources */,
 				BFDDCDFD1B5784B400C5DBBC /* VCTChannel.cpp in Sources */,
 				BFDDCDFB1B5784B400C5DBBC /* js_bindings_channel.cpp in Sources */,
@@ -647,6 +663,7 @@
 				BF7F59701B58B675001E885D /* VCTCPP2OC.mm in Sources */,
 				BFDDCDFA1B5784B400C5DBBC /* js_bindings_channel.cpp in Sources */,
 				BF7F59781B58B675001E885D /* VCTManager.m in Sources */,
+				BFC1E3381B5CE67300D6345D /* VCTHandleModule.m in Sources */,
 				BF7F597A1B58B675001E885D /* VCTModule.m in Sources */,
 				509D4AC917EBB2AB00697056 /* RootViewController.mm in Sources */,
 				BFDDCDFC1B5784B400C5DBBC /* VCTChannel.cpp in Sources */,

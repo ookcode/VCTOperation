@@ -7,10 +7,13 @@
 //
 
 #import "VCTModule.h"
-
 /************************************
-    selector容器
+方法定义原则
+- (NSString *)methodName:(NSString *)param Callback:(NSString *)callback;
+1.返回值为NSString
+2.两个NSString类型的参数
  ***********************************/
+
 @interface VCTMethodContainer : NSObject
 @property(nonatomic,assign) SEL method;
 - (id)initWithMethod:(SEL)method;

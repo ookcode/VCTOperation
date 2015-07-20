@@ -80,8 +80,12 @@ static AppDelegate s_sharedApplication;
     [[UIApplication sharedApplication] setStatusBarHidden: YES];
 
     VCTManager *manager = [VCTManager instance];
-    VCTAlertModule *alert = [[VCTAlertModule alloc] init];
+    
+    VCTAlertModule *alert = [VCTAlertModule instance];
     [manager registerModule:alert];
+
+    VCTHandleModule *handle = [VCTHandleModule instance];
+    [manager registerModule:handle];
     
     // IMPORTANT: Setting the GLView should be done after creating the RootViewController
     cocos2d::GLView *glview = cocos2d::GLViewImpl::createWithEAGLView(eaglView);

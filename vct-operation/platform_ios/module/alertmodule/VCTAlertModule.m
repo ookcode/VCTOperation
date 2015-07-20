@@ -16,6 +16,9 @@
 @end
 
 @implementation VCTAlertModule
+
+create_impl(VCTAlertModule)
+
 - (id)init {
     if (self = [super initWithName:MODULE_NAME]) {
         [self registerMethodWithName:@"show" Method:@selector(showAlert:Callback:)];

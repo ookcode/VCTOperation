@@ -9,5 +9,6 @@
 #import "VCTModule.h"
 
 @interface VCTAlertModule : VCTModule
+create_declare(VCTAlertModule)
 - (id)init;
 @end

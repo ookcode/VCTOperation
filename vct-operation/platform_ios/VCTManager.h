@@ -6,7 +6,6 @@
 //
 //
 
-#import "VCTUtilityMarco.h"
 #import "VCTModule.h"
 
 @interface VCTManager : NSObject

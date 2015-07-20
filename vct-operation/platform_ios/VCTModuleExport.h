@@ -8,3 +8,5 @@
 #import "VCTManager.h"
 
 #import "VCTAlertModule.h"
+
+#import "VCTHandleModule.h"

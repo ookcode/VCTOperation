@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VCTUtilityMarco.h"
 
 @interface VCTModule : NSObject
 @property(nonatomic,retain) NSString *moduleName;

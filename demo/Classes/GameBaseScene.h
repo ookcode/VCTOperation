@@ -10,8 +10,9 @@
 #define __demo__GameBaseScene__
 
 #include "cocos2d.h"
+#include "ui/CocosGUI.h"
 USING_NS_CC;
-
+using namespace ui;
 class GameBaseScene : public Layer
 {
 public:
@@ -19,6 +20,8 @@ public:
     
 private:
     bool init() override;
+    void showAlert(Ref*, Widget::TouchEventType);
+    void turnJsScene(Ref*, Widget::TouchEventType);
     CREATE_FUNC(GameBaseScene);
 };
 

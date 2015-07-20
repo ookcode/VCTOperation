@@ -20,6 +20,7 @@ using namespace cocos2d;
 #include <android/log.h>
 extern"C"
 {
+    //接收Java的回调
     void Java_com_vincent_cocos2dx_VCTChannel_Response(JNIEnv *env, jobject thiz, jstring args,jstring callback)
     {
         std::string param = JniHelper::jstring2string(args);
@@ -37,12 +38,14 @@ namespace VCT
     {
         std::string returnvalue("");
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-            returnvalue = VCTCPP2OC::Request(moduleName, methodName, args, address);
+        //调入至iOS平台
+        returnvalue = VCTCPP2OC::Request(moduleName, methodName, args, address);
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        //调入至android平台
         JniMethodInfo minfo;
-        const char * package = "com/vincent/cocos2dx/VCTChannel";
-        const char * param = "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;";
-        bool exist = JniHelper::getStaticMethodInfo(minfo, package,"Request",param);
+        const char * package = "com/vincent/cocos2dx/VCTChannel";//包名
+        const char * param = "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;";//参数和返回值
+        bool exist = JniHelper::getStaticMethodInfo(minfo, package,"Request",param);//判断静态函数Request函数是否存在
         if (exist) {
             //创建参数
             jstring jmodule = minfo.env->NewStringUTF(moduleName.c_str());
@@ -71,10 +74,12 @@ namespace VCT
     std::string Channel::Request(const std::string &moduleName, const std::string &methodName, const std::string &args, JS_CALLBACK &callback)
     {
         std::string address("");
+        //判断js回调是否为空
         if (JSVAL_IS_OBJECT_IMPL(JSVAL_TO_IMPL(callback)))
         {
+            //取回调函数地址值字符串作为key
             std::ostringstream os;
-            os << &callback;
+            os << methodName << &callback;
             address = os.str();
             JS_CALLBACK_MAP[address] = callback;
         }
@@ -85,10 +90,12 @@ namespace VCT
     std::string Channel::Request(const std::string &moduleName, const std::string &methodName, const std::string &args, CPP_CALLBACK callback)
     {
         std::string address("");
+        //判断c++回调是否为空
         if (nullptr != callback)
         {
+            //取回调函数地址值字符串作为key
             std::ostringstream os;
-            os << &callback;
+            os << methodName <<  &callback;
             address = os.str();
             CPP_CALLBACK_MAP[address] = callback;
 
@@ -101,24 +108,27 @@ namespace VCT
     {
         do
         {
+            //先搜索c++回调函数map
             auto cpp_iter = CPP_CALLBACK_MAP.find(address);
             if (cpp_iter != CPP_CALLBACK_MAP.end())
             {
+                //调用回调函数
                 CPP_CALLBACK callback = (*cpp_iter).second;
-                callback(args);
                 CPP_CALLBACK_MAP.erase(cpp_iter);
+                callback(args);
                 break;
             }
+            //在搜索js回调函数map
             auto js_iter = JS_CALLBACK_MAP.find(address);
             if (js_iter != JS_CALLBACK_MAP.end())
             {
+                //调用回调函数
                 JS_CALLBACK callback = (*js_iter).second;
                 JSContext *cx = ScriptingCore::getInstance()->getGlobalContext();
-                jsval v[] = {std_string_to_jsval(cx, args)};
-                JS::RootedValue jsRet(cx);
-                
-                ScriptingCore::getInstance()->executeJSFunctionWithThisObj(JS::RootedValue(cx, JSVAL_NULL), JS::RootedValue(cx, callback), JS::HandleValueArray::fromMarkedLocation(2, v), &jsRet);
+                jsval v[] = {std_string_to_jsval(cx, args)};//组织参数
+                JS::RootedValue jsRet(cx);//绑定返回值
                 JS_CALLBACK_MAP.erase(js_iter);
+                ScriptingCore::getInstance()->executeJSFunctionWithThisObj(JS::RootedValue(cx, JSVAL_NULL), JS::RootedValue(cx, callback), JS::HandleValueArray::fromMarkedLocation(2, v), &jsRet);
                 break;
             }
             CCASSERT(false, "callback not found");

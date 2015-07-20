@@ -8,15 +8,11 @@
 
 #include "GameBaseScene.h"
 #include "VCTChannel.h"
-#include "ScriptingCore.h"
-#include "ui/CocosGUI.h"
 
 #include "json/rapidjson.h"
 #include "json/document.h"
 #include "json/stringbuffer.h"
 #include "json/writer.h"
-
-using namespace ui;
 
 Scene* GameBaseScene::createScene()
 {
@@ -31,6 +27,34 @@ bool GameBaseScene::init()
     {
         return false;
     }
+    
+    Size winSize = Director::getInstance()->getWinSize();
+    {
+        Text* text = Text::create("show alert", "Marker Felt.ttf", 28);
+        text->setTouchEnabled(true);
+        text->setPosition(Size(winSize.width / 2,winSize.height / 2 - 100));
+        text->addTouchEventListener(CC_CALLBACK_2(GameBaseScene::showAlert, this));
+        this->addChild(text);
+    }
+    
+    {
+        Text* text = Text::create("run js scene", "Marker Felt.ttf", 28);
+        text->setTouchEnabled(true);
+        text->setPosition(Size(winSize.width / 2,winSize.height / 2 + 100));
+        text->addTouchEventListener(CC_CALLBACK_2(GameBaseScene::turnJsScene, this));
+        this->addChild(text);
+    }
+    
+    VCT::Channel::Request("handlemodule", "register", "tocppscene",[](const std::string& args)
+    {
+        Director::getInstance()->replaceScene(GameBaseScene::createScene());
+    });
+    return true;
+}
+
+void GameBaseScene::showAlert(Ref*, Widget::TouchEventType type)
+{
+    if (Widget::TouchEventType::ENDED != type) return ;
     rapidjson::Document doc;
     rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
     rapidjson::Value object(rapidjson::kObjectType);
@@ -45,20 +69,12 @@ bool GameBaseScene::init()
     
     VCT::Channel::Request("alertmodule", "show", jsonstr,[](const std::string& args)
     {
-        log("response : %s",args.c_str());
+        log("you click : %s",args.c_str());
     });
-    
-    Size winSize = Director::getInstance()->getWinSize();
-    Text* text = Text::create("touch to run js scene", "", 36);
-    text->setTouchEnabled(true);
-    text->setPosition(winSize / 2);
-    text->addTouchEventListener([](Ref *,Widget::TouchEventType type)
-    {
-        if (Widget::TouchEventType::ENDED != type) return ;
-        ScriptEngineProtocol *engine = ScriptingCore::getInstance();
-        ScriptEngineManager::getInstance()->setScriptEngine(engine);
-        ScriptingCore::getInstance()->runScript("main.js");
-    });
-    this->addChild(text);
-    return true;
+}
+
+void GameBaseScene::turnJsScene(Ref*, Widget::TouchEventType type)
+{
+    if (Widget::TouchEventType::ENDED != type) return ;
+    VCT::Channel::Request("handlemodule", "trigger","tojsscene");
 }
