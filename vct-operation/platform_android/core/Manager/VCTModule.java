@@ -47,6 +47,6 @@ public class VCTModule {
 		} while(false);
 		
 		Log.i("AndroidLog","method " + methodName + " not found");
-		return "0";
+		return "";
 	}
 }

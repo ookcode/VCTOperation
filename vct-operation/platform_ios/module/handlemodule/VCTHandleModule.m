@@ -28,13 +28,22 @@ create_impl(VCTHandleModule)
 }
 
 - (NSString *)registerHandle:(NSString *)param Callback:(NSString *)callback {
-    NSAssert(callback.length != 0, @"[handlemodule] register must provide a callback");
+    if (param.length == 0) {
+        NSLog(@"[handlemodule] register must provide a param as a key");
+        return @"";
+    }
+    if (callback.length == 0) {
+        NSLog(@"[handlemodule] register must provide a callback");
+    }
     [callbackDic_ setObject:callback forKey:param];
-    return @"1";
+    return @"";
 }
 
 - (NSString *)triggerHandle:(NSString *)param Callback:(NSString *)callback {
-    NSAssert(callback.length == 0, @"[handlemodule] trigger do not need a callback");
+    if (param.length == 0) {
+        NSLog(@"[handlemodule] trigger must provide a param as a key");
+        return @"";
+    }
     NSString *registeredCallback = [[callbackDic_ objectForKey:param] retain];
     if (nil == registeredCallback) {
         NSLog(@"[handlemodule] trigger %@ is not register",param);
@@ -42,6 +51,6 @@ create_impl(VCTHandleModule)
         [callbackDic_ removeObjectForKey:param];
         [[VCTManager instance] response:@"" Callback:registeredCallback];
     }
-    return @"1";
+    return @"";
 }
 @end

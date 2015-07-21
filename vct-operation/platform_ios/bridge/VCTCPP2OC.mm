@@ -19,9 +19,8 @@ std::string VCTCPP2OC::Request(const std::string& moduleName, const std::string&
     NSLog(@"module = %@",module);
     NSLog(@"method = %@",method);
     NSLog(@"param = %@",param);
-    NSLog(@"cbaddress = %@",cb.length==0?@"\"\"":cb);
+    NSLog(@"cbaddress = %@",cb);
     NSLog(@"***********************************");
     NSString *returnvalue = [[VCTManager instance] requestWithModuleName:module MethodName:method Param:param Callback:cb];
-    NSLog(@"return = %@",returnvalue);
     return returnvalue.UTF8String;
 }

@@ -1,4 +1,5 @@
 package alertmodule;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,13 +12,24 @@ import com.vincent.cocos2dx.VCTChannel;
 import Manager.VCTModule;
 
 public class VCTAlertModule extends VCTModule{
+	
+	private static VCTAlertModule mInstance = null;
 	private final static String MODULE_NAME = "alertmodule";
 	private Activity mActivity;
-	public VCTAlertModule(Activity activity){
+	
+	public static VCTAlertModule getInstance(Activity activity){
+		if(mInstance == null){
+			mInstance = new VCTAlertModule(activity);
+		}
+		return mInstance;
+	}
+	
+	private VCTAlertModule(Activity activity){
 		super(MODULE_NAME);
 		mActivity = activity;
 		this.RegisterMethod("show", "ShowAlertView");
 	}
+	
 	public String ShowAlertView(final String param,final String callback){
 
 		mActivity.runOnUiThread(new Runnable() { 
@@ -62,6 +74,6 @@ public class VCTAlertModule extends VCTModule{
 				}
             }
         });
-		return "1";
+		return "";
 	}
 }

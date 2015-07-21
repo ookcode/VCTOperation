@@ -52,6 +52,7 @@
 		BA3A85EC1A724AE900924D24 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3A85EB1A724AE900924D24 /* Security.framework */; };
 		BA4E718119EB6E3F00932425 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA4E718019EB6E3E00932425 /* MediaPlayer.framework */; };
 		BAEE4D841AC40C11003BEB0F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAEE4D831AC40C11003BEB0F /* Security.framework */; };
+		BF0A2FF11B5E1FF7004558F8 /* VCTHandleModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0A2FF01B5E1FF7004558F8 /* VCTHandleModule.m */; };
 		BF3235AE1B560DE000FF93F8 /* script in Resources */ = {isa = PBXBuildFile; fileRef = BF3235AD1B560DE000FF93F8 /* script */; };
 		BF3235AF1B560DE000FF93F8 /* script in Resources */ = {isa = PBXBuildFile; fileRef = BF3235AD1B560DE000FF93F8 /* script */; };
 		BF3235B21B560EC000FF93F8 /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = BF3235B01B560EC000FF93F8 /* main.js */; };
@@ -79,8 +80,6 @@
 		BF7F59791B58B675001E885D /* VCTManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7F596B1B58B675001E885D /* VCTManager.m */; };
 		BF7F597A1B58B675001E885D /* VCTModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7F596D1B58B675001E885D /* VCTModule.m */; };
 		BF7F597B1B58B675001E885D /* VCTModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7F596D1B58B675001E885D /* VCTModule.m */; };
-		BFC1E3381B5CE67300D6345D /* VCTHandleModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC1E3371B5CE67300D6345D /* VCTHandleModule.m */; };
-		BFC1E3391B5CE67300D6345D /* VCTHandleModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC1E3371B5CE67300D6345D /* VCTHandleModule.m */; };
 		BFDDCDFA1B5784B400C5DBBC /* js_bindings_channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDDCDF61B5784B400C5DBBC /* js_bindings_channel.cpp */; };
 		BFDDCDFB1B5784B400C5DBBC /* js_bindings_channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDDCDF61B5784B400C5DBBC /* js_bindings_channel.cpp */; };
 		BFDDCDFC1B5784B400C5DBBC /* VCTChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDDCDF81B5784B400C5DBBC /* VCTChannel.cpp */; };
@@ -169,6 +168,8 @@
 		BA4E718019EB6E3E00932425 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
 		BA4E718219EB6E4600932425 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
 		BAEE4D831AC40C11003BEB0F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		BF0A2FEF1B5E1FF7004558F8 /* VCTHandleModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTHandleModule.h; sourceTree = "<group>"; };
+		BF0A2FF01B5E1FF7004558F8 /* VCTHandleModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCTHandleModule.m; sourceTree = "<group>"; };
 		BF32359B1B560DB200FF93F8 /* cocos2d_js_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_js_bindings.xcodeproj; path = "../../cocos2d-js-v3.6/frameworks/js-bindings/bindings/proj.ios_mac/cocos2d_js_bindings.xcodeproj"; sourceTree = "<group>"; };
 		BF3235A41B560DD000FF93F8 /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = "../../cocos2d-js-v3.6/frameworks/js-bindings/cocos2d-x/build/cocos2d_libs.xcodeproj"; sourceTree = "<group>"; };
 		BF3235AD1B560DE000FF93F8 /* script */ = {isa = PBXFileReference; lastKnownFileType = folder; name = script; path = "../../cocos2d-js-v3.6/frameworks/js-bindings/bindings/script"; sourceTree = "<group>"; };
@@ -192,8 +193,6 @@
 		BF7F596D1B58B675001E885D /* VCTModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCTModule.m; sourceTree = "<group>"; };
 		BF7F596E1B58B675001E885D /* VCTModuleExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTModuleExport.h; sourceTree = "<group>"; };
 		BF7F596F1B58B675001E885D /* VCTUtilityMarco.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTUtilityMarco.h; sourceTree = "<group>"; };
-		BFC1E3361B5CE67300D6345D /* VCTHandleModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTHandleModule.h; sourceTree = "<group>"; };
-		BFC1E3371B5CE67300D6345D /* VCTHandleModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCTHandleModule.m; sourceTree = "<group>"; };
 		BFDDCDF61B5784B400C5DBBC /* js_bindings_channel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = js_bindings_channel.cpp; sourceTree = "<group>"; };
 		BFDDCDF71B5784B400C5DBBC /* js_bindings_channel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = js_bindings_channel.hpp; sourceTree = "<group>"; };
 		BFDDCDF81B5784B400C5DBBC /* VCTChannel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VCTChannel.cpp; sourceTree = "<group>"; };
@@ -347,6 +346,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BF0A2FEE1B5E1FF7004558F8 /* handlemodule */ = {
+			isa = PBXGroup;
+			children = (
+				BF0A2FEF1B5E1FF7004558F8 /* VCTHandleModule.h */,
+				BF0A2FF01B5E1FF7004558F8 /* VCTHandleModule.m */,
+			);
+			path = handlemodule;
+			sourceTree = "<group>";
+		};
 		BF32359C1B560DB200FF93F8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,7 +403,7 @@
 		BF7F59621B58B675001E885D /* module */ = {
 			isa = PBXGroup;
 			children = (
-				BFC1E3311B5CE65E00D6345D /* handlemodule */,
+				BF0A2FEE1B5E1FF7004558F8 /* handlemodule */,
 				BF7F59631B58B675001E885D /* alertmodule */,
 			);
 			path = module;
@@ -425,16 +433,6 @@
 				BF7F59691B58B675001E885D /* JSONKit.m */,
 			);
 			path = JSONKit;
-			sourceTree = "<group>";
-		};
-		BFC1E3311B5CE65E00D6345D /* handlemodule */ = {
-			isa = PBXGroup;
-			children = (
-				BFC1E3361B5CE67300D6345D /* VCTHandleModule.h */,
-				BFC1E3371B5CE67300D6345D /* VCTHandleModule.m */,
-			);
-			name = handlemodule;
-			path = runscenemodule;
 			sourceTree = "<group>";
 		};
 		BFDDCDF41B5784B400C5DBBC /* vct-operation */ = {
@@ -647,7 +645,6 @@
 				BF7F597B1B58B675001E885D /* VCTModule.m in Sources */,
 				BF7F59771B58B675001E885D /* JSONKit.m in Sources */,
 				BF3235CA1B56521800FF93F8 /* GameBaseScene.cpp in Sources */,
-				BFC1E3391B5CE67300D6345D /* VCTHandleModule.m in Sources */,
 				BF7F59731B58B675001E885D /* VCTOC2CPP.mm in Sources */,
 				BFDDCDFD1B5784B400C5DBBC /* VCTChannel.cpp in Sources */,
 				BFDDCDFB1B5784B400C5DBBC /* js_bindings_channel.cpp in Sources */,
@@ -663,8 +660,8 @@
 				BF7F59701B58B675001E885D /* VCTCPP2OC.mm in Sources */,
 				BFDDCDFA1B5784B400C5DBBC /* js_bindings_channel.cpp in Sources */,
 				BF7F59781B58B675001E885D /* VCTManager.m in Sources */,
-				BFC1E3381B5CE67300D6345D /* VCTHandleModule.m in Sources */,
 				BF7F597A1B58B675001E885D /* VCTModule.m in Sources */,
+				BF0A2FF11B5E1FF7004558F8 /* VCTHandleModule.m in Sources */,
 				509D4AC917EBB2AB00697056 /* RootViewController.mm in Sources */,
 				BFDDCDFC1B5784B400C5DBBC /* VCTChannel.cpp in Sources */,
 				BF7F59721B58B675001E885D /* VCTOC2CPP.mm in Sources */,

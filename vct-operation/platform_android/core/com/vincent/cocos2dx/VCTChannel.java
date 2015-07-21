@@ -16,10 +16,9 @@ public class VCTChannel extends Cocos2dxActivity {
 		Log.i("AndroidLog","module = " + moudle);
 		Log.i("AndroidLog","method = " + method);
 		Log.i("AndroidLog","param = " + args);
-	    Log.i("AndroidLog","cbaddress = " + (callback.length() == 0 ? "\"\"" : callback));
+	    Log.i("AndroidLog","cbaddress = " + callback);
 	    Log.i("AndroidLog","***********************************");
     	String result = VCTManager.getInstance().Request(moudle, method, args, callback);
-    	Log.i("AndroidLog", "return = " + result);
     	return result;
 	}
 }

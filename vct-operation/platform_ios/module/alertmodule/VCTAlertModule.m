@@ -50,7 +50,7 @@ callback:
     }
     
     [alert release];
-    return @"1";
+    return @"";
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

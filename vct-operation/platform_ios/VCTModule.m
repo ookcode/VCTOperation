@@ -65,7 +65,7 @@
         
     } while (0);
     NSLog(@"method '%@' not found",methodName);
-    return @"0";
+    return @"";
 }
 
 @end

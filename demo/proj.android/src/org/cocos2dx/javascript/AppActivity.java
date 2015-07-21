@@ -27,6 +27,8 @@ THE SOFTWARE.
 package org.cocos2dx.javascript;
 
 //import org.cocos2dx.lib.Cocos2dxActivity;
+import handlemodule.VCTHandleModule;
+
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
 import Manager.VCTManager;
@@ -44,8 +46,12 @@ public class AppActivity extends VCTChannel {
         glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8);
         
         VCTManager manager = VCTManager.getInstance();
-        VCTAlertModule alert = new VCTAlertModule(this);
+        
+        VCTAlertModule alert = VCTAlertModule.getInstance(this);
         manager.RegisterModule(alert);
+        
+        VCTHandleModule handle = VCTHandleModule.getInstance();
+        manager.RegisterModule(handle);
         
         return glSurfaceView;
     }

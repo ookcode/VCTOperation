@@ -16,14 +16,13 @@ public class VCTManager {
 		mModuleMap.put(module.GetModuleName(), module);
 	}
 	public String Request(final String moduleName,final String methodName,final String param,final String callback){
-		if(mModuleMap.containsKey(moduleName))
-		{
+		if(mModuleMap.containsKey(moduleName)){
 			VCTModule module = mModuleMap.get(moduleName);
 			String result = module.Execute(methodName, param, callback);
 			return result;
 		}
 		Log.i("AndroidLog","module " + moduleName + " not found");
-		return "0";
+		return "";
 	}
 	private VCTManager(){
 		
