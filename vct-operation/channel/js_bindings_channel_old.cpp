@@ -1,6 +1,7 @@
+#ifdef COCOS2D_JAVASCRIPT
+
 #include "js_bindings_channel_old.hpp"
 #include "cocos2d_specifics.hpp"
-#include "VCTChannel.h"
 
 #if (COCOS2D_VERSION < 0x00030500)
 
@@ -52,7 +53,7 @@ bool js_js_bindings_channel_old_Channel_Request(JSContext *cx, uint32_t argc, js
         ok &= jsval_to_std_string(cx, argv[0], &arg0);
         ok &= jsval_to_std_string(cx, argv[1], &arg1);
         ok &= jsval_to_std_string(cx, argv[2], &arg2);
-        jsval arg3 = args.get(3);
+        jsval arg3 = argv[3];
         JSB_PRECONDITION2(ok, cx, false, "js_js_bindings_channel_old_Channel_Request : Error processing arguments");
         std::string ret = VCT::Channel::Request(arg0, arg1, arg2, arg3);
         jsval jsret = JSVAL_NULL;
@@ -154,5 +155,6 @@ void register_all_js_bindings_channel_old(JSContext* cx, JSObject* obj) {
     js_register_js_bindings_channel_old_Channel(cx, obj);
 }
 
-#endif
+#endif      //(COCOS2D_VERSION < 0x00030500)
 
+#endif      //COCOS2D_JAVASCRIPT

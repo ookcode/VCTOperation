@@ -6,7 +6,7 @@
 //
 //
 
-//单例宏
+//Auto Create Singleton Macro
 #define create_declare(type) + (type *)instance;
 
 #define create_impl(type)                       \

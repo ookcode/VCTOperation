@@ -8,10 +8,11 @@
 
 #import "VCTModule.h"
 /************************************
-方法定义原则
+ 
+declare you method as this
+ 
 - (NSString *)methodName:(NSString *)param Callback:(NSString *)callback;
-1.返回值为NSString
-2.两个NSString类型的参数
+
  ***********************************/
 
 @interface VCTMethodContainer : NSObject

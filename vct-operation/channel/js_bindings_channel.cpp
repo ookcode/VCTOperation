@@ -1,6 +1,7 @@
+#ifdef COCOS2D_JAVASCRIPT
+
 #include "js_bindings_channel.hpp"
 #include "cocos2d_specifics.hpp"
-#include "VCTChannel.h"
 
 #if (COCOS2D_VERSION >= 0x00030500)
 
@@ -150,5 +151,7 @@ void register_all_js_bindings_channel(JSContext* cx, JS::HandleObject obj) {
     js_register_js_bindings_channel_Channel(cx, ns);
 }
 
-#endif
+#endif      //COCOS2D_JAVASCRIPT
+
+#endif      //(COCOS2D_VERSION >= 0x00030500)
 

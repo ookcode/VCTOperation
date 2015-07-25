@@ -7,10 +7,11 @@
 //
 
 #include "VCTChannel.h"
-#include "cocos2d.h"
-using namespace cocos2d;
+USING_NS_CC;
 
+#ifdef COCOS2D_JAVASCRIPT
 #include "ScriptingCore.h"
+#endif
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
 #include "VCTCPP2OC.h"
@@ -20,7 +21,7 @@ using namespace cocos2d;
 #include <android/log.h>
 extern"C"
 {
-    //接收Java的回调
+    //java static function Response will call here
     void Java_com_vincent_cocos2dx_VCTChannel_Response(JNIEnv *env, jobject thiz, jstring args,jstring callback)
     {
         std::string param = JniHelper::jstring2string(args);
@@ -33,51 +34,65 @@ extern"C"
 namespace VCT
 {
     std::map<std::string, CPP_CALLBACK> Channel::CPP_CALLBACK_MAP;
+    
+#ifdef COCOS2D_JAVASCRIPT
     std::map<std::string, JS_CALLBACK> Channel::JS_CALLBACK_MAP;
+#endif
+    
     std::string ExecRequest(const std::string &moduleName, const std::string &methodName, const std::string &args, const std::string &address)
     {
         std::string returnvalue("");
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-        //调入至iOS平台
+        
+        //iOS or mac os x platform will enter here
         returnvalue = VCTCPP2OC::Request(moduleName, methodName, args, address);
+        
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        //调入至android平台
+        
+        //android platform will enter here
         JniMethodInfo minfo;
-        const char * package = "com/vincent/cocos2dx/VCTChannel";//包名
-        const char * param = "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;";//参数和返回值
-        bool exist = JniHelper::getStaticMethodInfo(minfo, package,"Request",param);//判断静态函数Request函数是否存在
+        
+        //android project package name
+        const char * package = "com/vincent/cocos2dx/VCTChannel";
+        
+        //param and return value
+        const char * param = "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;";
+        
+        //whether the java static function Request exist
+        bool exist = JniHelper::getStaticMethodInfo(minfo, package,"Request",param);
+        
         if (exist) {
-            //创建参数
+            //create for param
             jstring jmodule = minfo.env->NewStringUTF(moduleName.c_str());
             jstring jmethod = minfo.env->NewStringUTF(methodName.c_str());
             jstring jparam = minfo.env->NewStringUTF(args.c_str());
             jstring jcallback = minfo.env->NewStringUTF(address.c_str());
-            //调用java静态函数
+            //call the static funtion Request into java
             jstring result = (jstring)minfo.env->CallStaticObjectMethod(minfo.classID, minfo.methodID,jmodule,jmethod,jparam,jcallback);
             if (result != NULL) {
                 returnvalue = JniHelper::jstring2string(result);
             }
-            //释放参数
+            //free jsstring
             minfo.env->DeleteLocalRef(jmodule);
             minfo.env->DeleteLocalRef(jmethod);
             minfo.env->DeleteLocalRef(jparam);
             minfo.env->DeleteLocalRef(jcallback);
         }else {
-            //函数不存在
             __android_log_print(ANDROID_LOG_INFO, "JNIMsg", "static method 'Request' not found");
             return "0";
         }
 #endif
         return returnvalue;
     }
-
+    
+#ifdef COCOS2D_JAVASCRIPT
     std::string Channel::Request(const std::string &moduleName, const std::string &methodName, const std::string &args, JS_CALLBACK &callback)
     {
         std::string address("");
-        //判断js回调是否为空
+        //whether the callback is null
         if (JSVAL_IS_OBJECT_IMPL(JSVAL_TO_IMPL(callback)))
         {
-            //取回调函数地址值字符串作为key
+            //use the methodName + callback address as the key
             std::ostringstream os;
             os << methodName << &callback;
             address = os.str();
@@ -86,14 +101,15 @@ namespace VCT
         std::string result = ExecRequest(moduleName, methodName, args, address);
         return result;
     }
+#endif
     
     std::string Channel::Request(const std::string &moduleName, const std::string &methodName, const std::string &args, CPP_CALLBACK callback)
     {
         std::string address("");
-        //判断c++回调是否为空
+        //whether the callback is null
         if (nullptr != callback)
         {
-            //取回调函数地址值字符串作为key
+            //use the methodName + callback address as the key
             std::ostringstream os;
             os << methodName <<  &callback;
             address = os.str();
@@ -108,21 +124,22 @@ namespace VCT
     {
         do
         {
-            //先搜索c++回调函数map
+            //first search in CPP_CALLBACK_MAP
             auto cpp_iter = CPP_CALLBACK_MAP.find(address);
             if (cpp_iter != CPP_CALLBACK_MAP.end())
             {
-                //调用回调函数
+                //exec the callback function
                 CPP_CALLBACK callback = (*cpp_iter).second;
                 CPP_CALLBACK_MAP.erase(cpp_iter);
                 callback(args);
                 break;
             }
-            //在搜索js回调函数map
+#ifdef COCOS2D_JAVASCRIPT
+            //search in JS_CALLBACK_MAP
             auto js_iter = JS_CALLBACK_MAP.find(address);
             if (js_iter != JS_CALLBACK_MAP.end())
             {
-                //调用回调函数
+                //exec the callback function
                 JS_CALLBACK callback = (*js_iter).second;
                 JS_CALLBACK_MAP.erase(js_iter);
                 
@@ -137,6 +154,7 @@ namespace VCT
 #endif
                 break;
             }
+#endif
             CCASSERT(false, "callback not found");
         } while (0);
     }

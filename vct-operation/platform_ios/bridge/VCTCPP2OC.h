@@ -4,7 +4,7 @@
 //
 //  Created by Vincent on 15/7/17.
 //
-//  cpp调用oc中转
+//  cpp call into oc
 
 #ifndef __demo__VCTCPP2OC__
 #define __demo__VCTCPP2OC__

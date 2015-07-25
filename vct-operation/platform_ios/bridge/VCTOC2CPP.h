@@ -4,7 +4,7 @@
 //
 //  Created by Vincent on 15/7/17.
 //
-//  oc调用cpp中转
+//  oc call into cpp
 
 #import <Foundation/Foundation.h>
 

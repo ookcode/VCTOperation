@@ -9,43 +9,50 @@
 #ifndef __VCTChannel__
 #define __VCTChannel__
 
+#include "cocos2d.h"
 #include <functional>
 #include <string>
 #include <map>
-#include "jsapi.h"
 
-#define SUPPORT_JS
+#ifdef COCOS2D_JAVASCRIPT
+#include "jsapi.h"
+#endif
 
 //get float cocos2d version. ex. 3.6
 #define GET_COCOS2D_VERSION() ((COCOS2D_VERSION>>16&0xFF) + (COCOS2D_VERSION>>8&0xFF)*0.1 + (COCOS2D_VERSION&0xFF)*0.01)
 
 namespace VCT
 {
-    //c++ 回调函数
+    //c++ callback
     typedef std::function<void(const std::string&)> CPP_CALLBACK;
     
-    //js 回调函数
+#ifdef COCOS2D_JAVASCRIPT
+    //js callback
     typedef jsval JS_CALLBACK;
+#endif
     
     class Channel
     {
     public:
         
-        //c++ 请求通道
+        //c++ request channel
         static std::string Request(const std::string& moduleName, const std::string& methodName,const std::string& args = "", CPP_CALLBACK callback = nullptr);
         
-        //js 请求通道
+#ifdef COCOS2D_JAVASCRIPT
+        //js request channel
         static std::string Request(const std::string& moduleName, const std::string& methodName,const std::string& args, JS_CALLBACK &callback);
-
-        //统一执行回调
+#endif
+        
+        //uniform response channel
         static void Response(const std::string& args,const std::string& address);
         
     private:
         
-        //储存js回调函数
+#ifdef COCOS2D_JAVASCRIPT
+        //save js callback
         static std::map<std::string, JS_CALLBACK> JS_CALLBACK_MAP;
-        
-        //储存c++回调函数
+#endif
+        //save cpp callback
         static std::map<std::string, CPP_CALLBACK> CPP_CALLBACK_MAP;
     };
 }

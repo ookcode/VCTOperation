@@ -10,6 +10,7 @@ LOCAL_SRC_FILES := hellojavascript/main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../../vct-operation/channel/VCTChannel.cpp \
 				   ../../../vct-operation/channel/js_bindings_channel.cpp \
+				   ../../../vct-operation/channel/js_bindings_channel_old.cpp \
 				   ../../Classes/GameBaseScene.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
