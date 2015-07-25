@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		016223361B633453009E3B8B /* js_bindings_channel_old.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 016223341B633453009E3B8B /* js_bindings_channel_old.cpp */; };
+		016223371B633453009E3B8B /* js_bindings_channel_old.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 016223341B633453009E3B8B /* js_bindings_channel_old.cpp */; };
 		1A82F5FB169AC92500C4B13A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A82F5FA169AC92500C4B13A /* libsqlite3.dylib */; };
 		502380DC17EBB88200990C9B /* libcurl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 502380DB17EBB88200990C9B /* libcurl.dylib */; };
 		5091731A17ECDF7A00D62437 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 5091731417ECDF7A00D62437 /* Icon-29.png */; };
@@ -122,6 +124,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		016223341B633453009E3B8B /* js_bindings_channel_old.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = js_bindings_channel_old.cpp; sourceTree = "<group>"; };
+		016223351B633453009E3B8B /* js_bindings_channel_old.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = js_bindings_channel_old.hpp; sourceTree = "<group>"; };
 		1A82F5FA169AC92500C4B13A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		1A96A4F2174A3432008653A9 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = "../../js-bindings/cocos2d-x/cocos2dx/platform/third_party/ios/libraries/libcurl.a"; sourceTree = "<group>"; };
 		502380DB17EBB88200990C9B /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
@@ -450,6 +454,8 @@
 			children = (
 				BFDDCDF61B5784B400C5DBBC /* js_bindings_channel.cpp */,
 				BFDDCDF71B5784B400C5DBBC /* js_bindings_channel.hpp */,
+				016223341B633453009E3B8B /* js_bindings_channel_old.cpp */,
+				016223351B633453009E3B8B /* js_bindings_channel_old.hpp */,
 				BFDDCDF81B5784B400C5DBBC /* VCTChannel.cpp */,
 				BFDDCDF91B5784B400C5DBBC /* VCTChannel.h */,
 			);
@@ -649,6 +655,7 @@
 				BFDDCDFD1B5784B400C5DBBC /* VCTChannel.cpp in Sources */,
 				BFDDCDFB1B5784B400C5DBBC /* js_bindings_channel.cpp in Sources */,
 				C06E23CC18CEFE680093C81A /* main.cpp in Sources */,
+				016223371B633453009E3B8B /* js_bindings_channel_old.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,6 +677,7 @@
 				509D4ABC17EBB2AB00697056 /* AppController.mm in Sources */,
 				BF3235C91B56521800FF93F8 /* GameBaseScene.cpp in Sources */,
 				BF7F59761B58B675001E885D /* JSONKit.m in Sources */,
+				016223361B633453009E3B8B /* js_bindings_channel_old.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

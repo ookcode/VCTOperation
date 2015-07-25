@@ -30,7 +30,6 @@
 
 #include "js_bindings_channel.hpp"
 #include "GameBaseScene.h"
-#include "VCTChannel.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;

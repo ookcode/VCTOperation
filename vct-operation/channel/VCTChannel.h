@@ -14,6 +14,11 @@
 #include <map>
 #include "jsapi.h"
 
+#define SUPPORT_JS
+
+//get float cocos2d version. ex. 3.6
+#define GET_COCOS2D_VERSION() ((COCOS2D_VERSION>>16&0xFF) + (COCOS2D_VERSION>>8&0xFF)*0.1 + (COCOS2D_VERSION&0xFF)*0.01)
+
 namespace VCT
 {
     //c++ 回调函数

@@ -124,11 +124,17 @@ namespace VCT
             {
                 //调用回调函数
                 JS_CALLBACK callback = (*js_iter).second;
-                JSContext *cx = ScriptingCore::getInstance()->getGlobalContext();
-                jsval v[] = {std_string_to_jsval(cx, args)};//组织参数
-                JS::RootedValue jsRet(cx);//绑定返回值
                 JS_CALLBACK_MAP.erase(js_iter);
+                
+                JSContext *cx = ScriptingCore::getInstance()->getGlobalContext();
+                jsval v[] = {std_string_to_jsval(cx, args)};
+#if (COCOS2D_VERSION < 0x00030500)
+                jsval jsRet;
+                ScriptingCore::getInstance()->executeJSFunctionWithThisObj(JSVAL_NULL, callback, 1,v, &jsRet);
+#else
+                JS::RootedValue jsRet(cx);
                 ScriptingCore::getInstance()->executeJSFunctionWithThisObj(JS::RootedValue(cx, JSVAL_NULL), JS::RootedValue(cx, callback), JS::HandleValueArray::fromMarkedLocation(2, v), &jsRet);
+#endif
                 break;
             }
             CCASSERT(false, "callback not found");

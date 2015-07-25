@@ -1,12 +1,11 @@
-#include "js_bindings_channel.hpp"
+#include "js_bindings_channel_old.hpp"
 #include "cocos2d_specifics.hpp"
 #include "VCTChannel.h"
 
-#if (COCOS2D_VERSION >= 0x00030500)
+#if (COCOS2D_VERSION < 0x00030500)
 
 template<class T>
 static bool dummy_constructor(JSContext *cx, uint32_t argc, jsval *vp) {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedValue initializing(cx);
     bool isNewValid = true;
     if (isNewValid)
@@ -19,14 +18,11 @@ static bool dummy_constructor(JSContext *cx, uint32_t argc, jsval *vp) {
         typeClass = typeMapIter->second;
         CCASSERT(typeClass, "The value is null.");
 
-        JS::RootedObject proto(cx, typeClass->proto.get());
-        JS::RootedObject parent(cx, typeClass->parentProto.get());
-        JS::RootedObject _tmp(cx, JS_NewObject(cx, typeClass->jsclass, proto, parent));
-        
+        JSObject *_tmp = JS_NewObject(cx, typeClass->jsclass, typeClass->proto, typeClass->parentProto);
         T* cobj = new T();
         js_proxy_t *pp = jsb_new_proxy(cobj, _tmp);
-        AddObjectRoot(cx, &pp->obj);
-        args.rval().set(OBJECT_TO_JSVAL(_tmp));
+        JS_AddObjectRoot(cx, &pp->obj);
+        JS_SET_RVAL(cx, vp, OBJECT_TO_JSVAL(_tmp));
         return true;
     }
 
@@ -37,35 +33,34 @@ static bool empty_constructor(JSContext *cx, uint32_t argc, jsval *vp) {
     return false;
 }
 
-static bool js_is_native_obj(JSContext *cx, uint32_t argc, jsval *vp)
+static bool js_is_native_obj(JSContext *cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    args.rval().setBoolean(true);
+    vp.set(BOOLEAN_TO_JSVAL(true));
     return true;    
 }
 JSClass  *jsb_VCT_Channel_class;
 JSObject *jsb_VCT_Channel_prototype;
 
-bool js_js_bindings_channel_Channel_Request(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_js_bindings_channel_old_Channel_Request(JSContext *cx, uint32_t argc, jsval *vp)
 {
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+    jsval *argv = JS_ARGV(cx, vp);
     bool ok = true;
     if (argc == 4) {
         std::string arg0;
         std::string arg1;
         std::string arg2;
-        ok &= jsval_to_std_string(cx, args.get(0), &arg0);
-        ok &= jsval_to_std_string(cx, args.get(1), &arg1);
-        ok &= jsval_to_std_string(cx, args.get(2), &arg2);
+        ok &= jsval_to_std_string(cx, argv[0], &arg0);
+        ok &= jsval_to_std_string(cx, argv[1], &arg1);
+        ok &= jsval_to_std_string(cx, argv[2], &arg2);
         jsval arg3 = args.get(3);
-        JSB_PRECONDITION2(ok, cx, false, "js_js_bindings_channel_Channel_Request : Error processing arguments");
+        JSB_PRECONDITION2(ok, cx, false, "js_js_bindings_channel_old_Channel_Request : Error processing arguments");
         std::string ret = VCT::Channel::Request(arg0, arg1, arg2, arg3);
         jsval jsret = JSVAL_NULL;
         jsret = std_string_to_jsval(cx, ret);
-        args.rval().set(jsret);
+        JS_SET_RVAL(cx, vp, jsret);
         return true;
     }
-    JS_ReportError(cx, "js_js_bindings_channel_Channel_Request : wrong number of arguments");
+    JS_ReportError(cx, "js_js_bindings_channel_old_Channel_Request : wrong number of arguments");
     return false;
 }
 
@@ -87,7 +82,7 @@ void js_VCT_Channel_finalize(JSFreeOp *fop, JSObject *obj) {
     }
 }
 
-void js_register_js_bindings_channel_Channel(JSContext *cx, JS::HandleObject global) {
+void js_register_js_bindings_channel_old_Channel(JSContext *cx, JSObject *global) {
     jsb_VCT_Channel_class = (JSClass *)calloc(1, sizeof(JSClass));
     jsb_VCT_Channel_class->name = "Channel";
     jsb_VCT_Channel_class->addProperty = JS_PropertyStub;
@@ -101,8 +96,8 @@ void js_register_js_bindings_channel_Channel(JSContext *cx, JS::HandleObject glo
     jsb_VCT_Channel_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
 
     static JSPropertySpec properties[] = {
-        JS_PSG("__nativeObj", js_is_native_obj, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_PS_END
+        {"__nativeObj", 0, JSPROP_ENUMERATE | JSPROP_PERMANENT, JSOP_WRAPPER(js_is_native_obj), JSOP_NULLWRAPPER},
+        {0, 0, 0, JSOP_NULLWRAPPER, JSOP_NULLWRAPPER}
     };
 
     static JSFunctionSpec funcs[] = {
@@ -110,13 +105,13 @@ void js_register_js_bindings_channel_Channel(JSContext *cx, JS::HandleObject glo
     };
 
     static JSFunctionSpec st_funcs[] = {
-        JS_FN("Request", js_js_bindings_channel_Channel_Request, 4, JSPROP_PERMANENT | JSPROP_ENUMERATE),
+        JS_FN("Request", js_js_bindings_channel_old_Channel_Request, 4, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FS_END
     };
 
     jsb_VCT_Channel_prototype = JS_InitClass(
         cx, global,
-        JS::NullPtr(), // parent proto
+        NULL, // parent proto
         jsb_VCT_Channel_class,
         dummy_constructor<VCT::Channel>, 0, // no constructor
         properties,
@@ -142,12 +137,21 @@ void js_register_js_bindings_channel_Channel(JSContext *cx, JS::HandleObject glo
     }
 }
 
-void register_all_js_bindings_channel(JSContext* cx, JS::HandleObject obj) {
-    // Get the ns
+void register_all_js_bindings_channel_old(JSContext* cx, JSObject* obj) {
+    // first, try to get the ns
+    JS::RootedValue nsval(cx);
     JS::RootedObject ns(cx);
-    get_or_create_js_obj(cx, obj, "VCT", &ns);
+    JS_GetProperty(cx, obj, "VCT", &nsval);
+    if (nsval == JSVAL_VOID) {
+        ns = JS_NewObject(cx, NULL, NULL, NULL);
+        nsval = OBJECT_TO_JSVAL(ns);
+        JS_SetProperty(cx, obj, "VCT", nsval);
+    } else {
+        JS_ValueToObject(cx, nsval, &ns);
+    }
+    obj = ns;
 
-    js_register_js_bindings_channel_Channel(cx, ns);
+    js_register_js_bindings_channel_old_Channel(cx, obj);
 }
 
 #endif
