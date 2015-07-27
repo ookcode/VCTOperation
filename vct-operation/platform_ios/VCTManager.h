@@ -9,9 +9,7 @@
 #import "VCTModule.h"
 
 @interface VCTManager : NSObject
-{
-    NSMutableDictionary *moduleDic_;
-}
+
 create_declare(VCTManager)
 
 - (void)registerModule:(VCTModule *)module;

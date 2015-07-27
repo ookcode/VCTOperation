@@ -21,6 +21,7 @@ declare you method as this
 @end
 
 @implementation VCTMethodContainer
+
 - (id)initWithMethod:(SEL)method {
     if (self = [super init]) {
         [self setMethod:method];
@@ -31,6 +32,12 @@ declare you method as this
 
 @implementation VCTModule
 
+- (void)dealloc {
+    self.moduleName = nil;
+    self.methodDic = nil;
+    [super dealloc];
+}
+
 - (id)init {
     NSAssert(false, @"subclasses must use initWithName to init");
     return self;
@@ -39,7 +46,7 @@ declare you method as this
 - (id)initWithName:(NSString *)name {
     if (self = [super init]) {
         self.moduleName = name;
-        _methodDic = [[NSMutableDictionary alloc] init];
+        self.methodDic = [[NSMutableDictionary alloc] init];
     }
     return self;
 }

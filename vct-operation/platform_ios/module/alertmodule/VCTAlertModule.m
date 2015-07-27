@@ -12,12 +12,17 @@
 #define MODULE_NAME @"alertmodule"
 
 @interface VCTAlertModule()<UIAlertViewDelegate>
-@property(nonatomic,retain) NSString *showAlertCB;
+@property(nonatomic,copy) NSString *showAlertCB;
 @end
 
 @implementation VCTAlertModule
 
 create_impl(VCTAlertModule)
+
+- (void)dealloc {
+    self.showAlertCB = nil;
+    [super dealloc];
+}
 
 - (id)init {
     if (self = [super initWithName:MODULE_NAME]) {

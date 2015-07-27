@@ -10,7 +10,7 @@
 #import "VCTUtilityMarco.h"
 
 @interface VCTModule : NSObject
-@property(nonatomic,retain) NSString *moduleName;
+@property(nonatomic,copy) NSString *moduleName;
 @property(nonatomic,retain) NSMutableDictionary *methodDic;
 - (id)init;
 - (id)initWithName:(NSString *)name;

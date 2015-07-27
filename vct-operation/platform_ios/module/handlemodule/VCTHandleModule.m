@@ -11,16 +11,20 @@
 #define MODULE_NAME @"handlemodule"
 
 @interface VCTHandleModule()
-{
-    NSMutableDictionary *callbackDic_;
-}
+@property(nonatomic,retain) NSMutableDictionary *callbackDic;
 @end
 
 @implementation VCTHandleModule
 create_impl(VCTHandleModule)
+
+- (void)dealloc {
+    self.callbackDic = nil;
+    [super dealloc];
+}
+
 - (id)init {
     if (self = [super initWithName:MODULE_NAME]) {
-        callbackDic_ = [[NSMutableDictionary alloc] init];
+        self.callbackDic = [[NSMutableDictionary alloc] init];
         [self registerMethodWithName:@"register" Method:@selector(registerHandle:Callback:)];
         [self registerMethodWithName:@"trigger" Method:@selector(triggerHandle:Callback:)];
     }
@@ -35,7 +39,7 @@ create_impl(VCTHandleModule)
     if (callback.length == 0) {
         NSLog(@"[handlemodule] register must provide a callback");
     }
-    [callbackDic_ setObject:callback forKey:param];
+    [self.callbackDic setObject:callback forKey:param];
     return @"";
 }
 
@@ -44,11 +48,11 @@ create_impl(VCTHandleModule)
         NSLog(@"[handlemodule] trigger must provide a param as a key");
         return @"";
     }
-    NSString *registeredCallback = [[callbackDic_ objectForKey:param] retain];
+    NSString *registeredCallback = [[self.callbackDic objectForKey:param] retain];
     if (nil == registeredCallback) {
         NSLog(@"[handlemodule] trigger %@ is not register",param);
     }else {
-        [callbackDic_ removeObjectForKey:param];
+        [self.callbackDic removeObjectForKey:param];
         [[VCTManager instance] response:@"" Callback:registeredCallback];
     }
     return @"";

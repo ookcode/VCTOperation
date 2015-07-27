@@ -8,12 +8,23 @@
 
 #import "VCTManager.h"
 #import "VCTOC2CPP.h"
+
+@interface VCTManager()
+@property(nonatomic,retain) NSMutableDictionary *moduleDic;
+@end
+
 @implementation VCTManager
+
 create_impl(VCTManager)
+
+- (void)dealloc {
+    self.moduleDic = nil;
+    [super dealloc];
+}
 
 - (id)init {
     if (self = [super init]) {
-        moduleDic_ = [[NSMutableDictionary alloc] init];
+        self.moduleDic = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -23,7 +34,7 @@ create_impl(VCTManager)
         NSLog(@"register module '%@' fail",module.moduleName);
         return;
     }
-    [moduleDic_ setObject:module forKey:module.moduleName];
+    [self.moduleDic setObject:module forKey:module.moduleName];
 }
 
 - (NSString *)requestWithModuleName:(NSString *)moduleName
@@ -31,7 +42,7 @@ create_impl(VCTManager)
                               Param:(NSString *)param
                            Callback:(NSString *)callback {
     
-    VCTModule *module = [moduleDic_ objectForKey:moduleName];
+    VCTModule *module = [self.moduleDic objectForKey:moduleName];
     if (!module) {
         NSLog(@"module '%@' not found",moduleName);
         return @"";
