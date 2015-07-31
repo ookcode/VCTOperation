@@ -4,8 +4,8 @@ VCTOperation是一个适用于coocs2d-x以及cocos2d-js引擎的游戏运营框�
 本框架实现了一个通道，让c++以及javascript可以方便的调用objective-c以及java所编写的模块。<br>
 # 框架使用说明
 ##iOS接入指南
-1、将vct-operation目录下的channel以及platform_ios导入工程中<br>
-![](https://github.com/ookcode/VCTOperation/raw/master/README/add_to_ios.png)
+1、将vct-operation目录下的channel以及platform_ios导入工程中<br><br>
+![](https://github.com/ookcode/VCTOperation/raw/master/README/add_to_ios.png)<br>
 2、在cocos2d-js中使用，需要注册jsb代码，方法如下
 ```cpp
 //在AppDelegate.cpp文件头部加入
@@ -24,8 +24,8 @@ sc->addRegisterCallback(register_all_js_bindings_channel_old);
 //在需要使用的类中
 #include "VCTChannel.h"
 ```
-4、注册需要使用的模块<br>
-（因本框架可能用于多个项目，每个项目所需要用到的模块并不一样，故在AppController.mm中注册）
+4、初始化<br>
+（因本框架可能用于多个项目，每个项目所需要用到的模块并不一样，故在AppController.mm中初始化）
 ```objective-c
 //在AppController.mm顶部加入
 #import "VCTModuleExport.h"
@@ -41,7 +41,7 @@ VCTAlertModule *alert = [VCTAlertModule instance];
 ```
 ##Android接入指南
 writing
-##调用方法
+##调用指南
 1、在c++中调用
 ```cpp
 //cpp调用原型
