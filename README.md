@@ -6,4 +6,5 @@ VCTOperation是一个适用于coocs2d-x以及cocos2d-js引擎的游戏运营框�
 本框架主要实现一个通道，让c++以及javascript可以方便的调用objective-c以及java所编写的模块。
 
 # 框架使用说明
-.......writing
+##iOS接入指南
+![](https://github.com/ookcode/VCTOperation/raw/master/README/add_to_ios.png)
