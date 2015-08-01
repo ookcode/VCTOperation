@@ -3,7 +3,9 @@ VCTOperation是一个适用于coocs2d-x以及cocos2d-js引擎的游戏运营框�
 
 本框架可以帮助您在游戏中方便快捷的接入各种第三方SDK以及调用各平台的特有功能。
 
-本框架实现了一个通道，让c++以及javascript可以方便的调用objective-c以及java所编写的模块。
+（让c++以及javascript可以方便的调用objective-c以及java所编写的模块）
+
+框架中包含了一些常用的功能模块：弹出提示框，调用相册/相机以及一些常用的sdk封装，目前正在完善中...
 
 # 框架使用说明
 ##iOS接入指南
@@ -22,7 +24,7 @@ VCTOperation是一个适用于coocs2d-x以及cocos2d-js引擎的游戏运营框�
 
 3、修改安卓工程jni目录下的Android.mk文件
 
-若不是cocos2d-js工程，可以不引入js_bindings_channel.cpp以及js_bindings_channel_old.cpp
+（若不是cocos2d-js工程，可以不引入js_bindings_channel.cpp以及js_bindings_channel_old.cpp）
 
 ![](https://github.com/ookcode/VCTOperation/raw/master/README/add_to_android3.png)
 
@@ -41,6 +43,7 @@ sc->addRegisterCallback(register_all_js_bindings_channel);
 sc->addRegisterCallback(register_all_js_bindings_channel_old);
 ```
 2、iOS初始化
+
 （因本框架可能用于多个项目，每个项目所需要用到的模块并不一样，故在AppController.mm中初始化）
 ```objective-c
 //在AppController.mm顶部加入
@@ -85,4 +88,4 @@ function(args) {
 }
 ```
 ##自定义模块指南
-writing
+####iOS自定义模块指南
