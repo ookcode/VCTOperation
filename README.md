@@ -11,7 +11,23 @@ VCTOperation是一个适用于coocs2d-x以及cocos2d-js引擎的游戏运营框�
 
 ![](https://github.com/ookcode/VCTOperation/raw/master/README/add_to_ios.png)
 
-2、在cocos2d-js中使用，需要注册jsb代码，方法如下
+##Android接入指南
+1、打开安卓工程，右键工程->Build Path->Link Source...
+
+![](https://github.com/ookcode/VCTOperation/raw/master/README/add_to_android.png)
+
+2、导入本框架中的platform_android中core以及module
+
+![](https://github.com/ookcode/VCTOperation/raw/master/README/add_to_android2.png)
+
+3、修改安卓工程jni目录下的Android.mk文件
+
+若不是cocos2d-js工程，可以不引入js_bindings_channel.cpp以及js_bindings_channel_old.cpp
+
+![](https://github.com/ookcode/VCTOperation/raw/master/README/add_to_android3.png)
+
+##调用指南
+1、在cocos2d-js中使用，需要注册jsb代码，方法如下
 ```cpp
 //在AppDelegate.cpp文件头部加入
 #include "js_bindings_channel.hpp"
@@ -24,8 +40,7 @@ sc->addRegisterCallback(register_all_js_bindings_channel);
 //如果您的引擎版本低于v3.5，请替换成
 sc->addRegisterCallback(register_all_js_bindings_channel_old);
 ```
-4、初始化
-
+2、iOS初始化
 （因本框架可能用于多个项目，每个项目所需要用到的模块并不一样，故在AppController.mm中初始化）
 ```objective-c
 //在AppController.mm顶部加入
@@ -40,17 +55,13 @@ VCTAlertModule *alert = [VCTAlertModule instance];
 //注册模块到管理类
 [manager registerModule:alert];
 ```
-##Android接入指南
-1、打开安卓工程，右键工程->Build Path->Link Source...
+3、Android初始化
 
-![](https://github.com/ookcode/VCTOperation/raw/master/README/add_to_android.png)
+（因本框架可能用于多个项目，每个项目所需要用到的模块并不一样，故在src下的AppActivity.java中初始化）
 
-2、导入本框架中的platform_android中core以及module
+![](https://github.com/ookcode/VCTOperation/raw/master/README/android_init.png)
 
-![](https://github.com/ookcode/VCTOperation/raw/master/README/add_to_android2.png)
-
-##调用指南
-1、在c++中调用
+4、在c++中调用
 ```cpp
 #include "VCTChannel.h"
 //cpp调用原型
@@ -62,7 +73,7 @@ VCT::Channel::Request("模块名", "方法名", "参数", 回调函数)
     ...
 }
 ```
-2、在javascript中调用
+5、在javascript中调用
 ```javascript
 //js调用原型
 VCT.Channel.Request("模块名", "方法名", "参数", 回调函数)
