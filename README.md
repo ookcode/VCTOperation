@@ -99,6 +99,6 @@ self = [super initWithName:@"MODULE_NAME"]
 ```objective-c
 [self registerMethodWithName:@"METHOD_NAME" Method:@selector(xxxx:Callback:)];
 ```
-5、更多详细请参考vct-operation/platform_ios/module/alertmodule/VCTAlertModule.h/.m
+5、更多详细请参考[VCTAlertModule.m](https://github.com/ookcode/VCTOperation/blob/master/vct-operation/platform_ios/module/alertmodule/VCTAlertModule.m)<br>
 
 ####Android自定义模块指南
