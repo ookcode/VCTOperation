@@ -1,11 +1,7 @@
 # VCTOperation
-VCTOperation是一个适用于coocs2d-x以及cocos2d-js引擎的游戏运营框架。<br>
-
-本框架可以帮助您在游戏中方便快捷的接入各种第三方SDK以及调用各平台的特有功能。<br>
-（让c++以及javascript可以方便的调用objective-c以及java所编写的模块）<br>
-
-框架中包含了一些常用的功能模块：弹出提示框，调用相册/相机以及一些常用的sdk封装<br>
-目前正在完善中...<br>
+VCTOperation是一个适用于coocs2d-x以及cocos2d-js引擎的游戏运营框架。<br><br>
+本框架可以帮助您在游戏中方便快捷的接入各种第三方SDK以及调用各平台的特有功能。<br><br>
+框架中包含了一些常用的平台功能的封装，以及一些常用第三方sdk封装
 # 框架使用说明
 ##iOS接入指南
 1、将vct-operation目录下的channel以及platform_ios导入工程中
@@ -130,4 +126,4 @@ this.RegisterMethod("METHOD_NAME", "xxxx");
 ```java
 VCTChannel.Response("回调参数", @"回调函数字符串");
 ```
-6、更多详细请参考[VCTAlertModule.java](https://github.com/ookcode/VCTOperation/blob/master/vct-operation/platform_ios/module/alertmodule/VCTAlertModule.m)<br>
+6、更多详细请参考[VCTAlertModule.java](https://github.com/ookcode/VCTOperation/blob/master/vct-operation/platform_android/module/alertmodule/VCTAlertModule.java)<br>
