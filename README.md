@@ -93,12 +93,17 @@ self = [super initWithName:@"MODULE_NAME"]
 ```
 3、定义方法时采用以下原型，传入参数和回调函数字符串
 ```objective-c
+//回调函数字符串callback建议在此处存为成员变量
 - (NSString *)xxxx:(NSString *)param Callback:(NSString *)callback
 ```
 4、将定义的方法注册进模块，方法名字符串自定
 ```objective-c
 [self registerMethodWithName:@"METHOD_NAME" Method:@selector(xxxx:Callback:)];
 ```
-5、更多详细请参考[VCTAlertModule.m](https://github.com/ookcode/VCTOperation/blob/master/vct-operation/platform_ios/module/alertmodule/VCTAlertModule.m)<br>
+5、调用回调函数，传入的参数自定
+```objective-c
+[[VCTManager instance] response:@"参数" Callback:@"回调函数字符串"];
+```
+6、更多详细请参考[VCTAlertModule.m](https://github.com/ookcode/VCTOperation/blob/master/vct-operation/platform_ios/module/alertmodule/VCTAlertModule.m)<br>
 
 ####Android自定义模块指南
