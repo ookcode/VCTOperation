@@ -1,6 +1,8 @@
 # VCTOperation
-VCTOperation是一个适用于coocs2d-x以及cocos2d-js引擎的游戏运营框架。<br><br>
-本框架可以帮助您在游戏中方便快捷的接入各种第三方SDK以及调用各平台的特有功能。<br><br>
+VCTOperation是一个适用于coocs2d-x以及cocos2d-js引擎的游戏运营框架。<br>
+
+本框架可以帮助您在游戏中方便快捷的接入各种第三方SDK以及调用各平台的特有功能。<br>
+
 框架中包含了一些常用的平台功能的封装，以及一些常用第三方sdk封装
 # 框架使用说明
 ##iOS接入指南
@@ -87,7 +89,7 @@ function(args) {
 1、新建objective-c类,继承 VCTModule <br>
 2、init时需要调用以下方法，传入模块名
 ```objective-c
-if (self = [super initWithName:MODULE_NAME]) {
+if (self = [super initWithName:@"MODULE_NAME"]) {
     ...
 }
 return self;
@@ -97,13 +99,13 @@ return self;
 //回调函数字符串callback建议在此处存为成员变量
 - (NSString *)xxxx:(NSString *)param Callback:(NSString *)callback
 ```
-4、将定义的方法注册进模块，方法名字符串自定
+4、将定义的方法注册进模块，传入方法名和函数选择器
 ```objective-c
 [self registerMethodWithName:@"METHOD_NAME" Method:@selector(xxxx:Callback:)];
 ```
-5、调用回调函数，传入的参数自定
+5、调用回调函数，传入回传参数以及回调函数字符串
 ```objective-c
-[[VCTManager instance] response:@"参数" Callback:@"回调函数字符串"];
+[[VCTManager instance] response:@"回传参数" Callback:@"回调函数字符串"];
 ```
 6、更多详细请参考[VCTAlertModule.m](https://github.com/ookcode/VCTOperation/blob/master/vct-operation/platform_ios/module/alertmodule/VCTAlertModule.m)<br>
 
@@ -118,12 +120,12 @@ super("MODULE_NAME");
 //回调函数字符串callback建议在此处存为成员变量
 public String xxxx(final String param,final String callback)
 ```
-4、将定义的方法注册进模块，方法名字符串自定
+4、将定义的方法注册进模块，传入调用时的方法名和实际方法名
 ```java
 this.RegisterMethod("METHOD_NAME", "xxxx");
 ```
-5、调用回调函数，传入的参数自定
+5、调用回调函数，传入回传参数以及回调函数字符串
 ```java
-VCTChannel.Response("回调参数", @"回调函数字符串");
+VCTChannel.Response("回传参数", @"回调函数字符串");
 ```
 6、更多详细请参考[VCTAlertModule.java](https://github.com/ookcode/VCTOperation/blob/master/vct-operation/platform_android/module/alertmodule/VCTAlertModule.java)<br>
