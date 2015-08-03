@@ -86,4 +86,19 @@ function(args) {
 ```
 ##自定义模块指南
 ####iOS自定义模块指南
+1、自定义模块需要继承VCTModule<br>
+2、自定义模块init时需要调用，传入模块名
+```objective-c
+self = [super initWithName:@"MODULE_NAME"]
+```
+3、定义方法时采用以下原型，传入参数和回调函数字符串
+```objective-c
+- (NSString *)xxxx:(NSString *)param Callback:(NSString *)callback
+```
+4、将定义的方法注册进模块，方法名字符串自定
+```objective-c
+[self registerMethodWithName:@"METHOD_NAME" Method:@selector(xxxx:Callback:)];
+```
+5、更多详细请参考vct-operation/platform_ios/module/alertmodule/VCTAlertModule.h/.m
+
 ####Android自定义模块指南
