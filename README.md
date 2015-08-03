@@ -1,7 +1,9 @@
 # VCTOperation
 VCTOperation是一个适用于coocs2d-x以及cocos2d-js引擎的游戏运营框架。<br>
+
 本框架可以帮助您在游戏中方便快捷的接入各种第三方SDK以及调用各平台的特有功能。<br>
 （让c++以及javascript可以方便的调用objective-c以及java所编写的模块）<br>
+
 框架中包含了一些常用的功能模块：弹出提示框，调用相册/相机以及一些常用的sdk封装<br>
 目前正在完善中...<br>
 # 框架使用说明
@@ -86,10 +88,13 @@ function(args) {
 ```
 ##自定义模块指南
 ####iOS自定义模块指南
-1、自定义模块需要继承VCTModule<br>
-2、自定义模块init时需要调用，传入模块名
+1、新建objective-c类,继承 VCTModule <br>
+2、init时需要调用以下方法，传入模块名
 ```objective-c
-self = [super initWithName:@"MODULE_NAME"]
+if (self = [super initWithName:MODULE_NAME]) {
+    ...
+}
+return self;
 ```
 3、定义方法时采用以下原型，传入参数和回调函数字符串
 ```objective-c
@@ -107,3 +112,22 @@ self = [super initWithName:@"MODULE_NAME"]
 6、更多详细请参考[VCTAlertModule.m](https://github.com/ookcode/VCTOperation/blob/master/vct-operation/platform_ios/module/alertmodule/VCTAlertModule.m)<br>
 
 ####Android自定义模块指南
+1、新建java类,继承 VCTModule <br>
+2、构造函数中调用以下方法，传入模块名
+```java
+super("MODULE_NAME");
+```
+3、定义方法时采用以下原型，传入参数和回调函数字符串
+```java
+//回调函数字符串callback建议在此处存为成员变量
+public String xxxx(final String param,final String callback)
+```
+4、将定义的方法注册进模块，方法名字符串自定
+```java
+this.RegisterMethod("METHOD_NAME", "xxxx");
+```
+5、调用回调函数，传入的参数自定
+```java
+VCTChannel.Response("回调参数", @"回调函数字符串");
+```
+6、更多详细请参考[VCTAlertModule.java](https://github.com/ookcode/VCTOperation/blob/master/vct-operation/platform_ios/module/alertmodule/VCTAlertModule.m)<br>
