@@ -130,3 +130,4 @@ this.RegisterMethod("METHOD_NAME", "xxxx");
 VCTChannel.Response("回传参数", @"回调函数字符串");
 ```
 6、更多详细请参考[VCTAlertModule.java](https://github.com/ookcode/VCTOperation/blob/master/vct-operation/platform_android/module/alertmodule/VCTAlertModule.java)
+
