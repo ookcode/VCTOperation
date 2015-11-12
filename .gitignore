@@ -1,29 +1,21 @@
-project.xcworkspace
-
-*.xcuserstate
-
+# Ignore files build by xcode
+*.mode*v*
+*.pbxuser
+*.xcbkptlist
 *.xcworkspacedata
+*.xcuserstate
+*.xccheckout
+xcschememanagement.plist
+.DS_Store
+._.*
+xcuserdata/
+DerivedData/
 
-xcuserdata
-
-cocos2d-js-v3.6
-
-proj.win32
-
+# Ignore files build by ndk and eclipse
+libs/
+bin/
+obj/
+gen/
+assets/
+local.properties
 .settings
-
-obj
-
-libs
-
-bin
-
-assets
-
-.project
-
-.cproject
-
-.classpath
-
-*.apk
