@@ -14,10 +14,15 @@
 
 std::string VCTManager::Request(const std::string& moduleName, const std::string& methodName,const std::string& args, const std::string& cbaddress)
 {
+    NSLog(@"**************Request**************");
+    NSLog(@"module = %s",moduleName.c_str());
+    NSLog(@"method = %s",methodName.c_str());
+    NSLog(@"param = %s",args.c_str());
+    NSLog(@"cbaddress = %s",cbaddress.c_str());
+    NSLog(@"***********************************");
     std::string module = moduleName;
     std::transform(module.begin(), module.end(), module.begin(), tolower);
-    if (module == "sysmodule")
-    {
+    if (module == "sysmodule") {
         std::string method = methodName;
         std::transform(method.begin(), method.end(), method.begin(), tolower);
         NSDictionary* infoDict = [[NSBundle mainBundle] infoDictionary];
@@ -101,7 +106,11 @@ std::string VCTManager::Request(const std::string& moduleName, const std::string
             free(msgBuffer);
             
             return macAddressString.UTF8String;
+        } else {
+            NSLog(@"method = %s not found",methodName.c_str());
         }
+    } else {
+        NSLog(@"module = %s not found",moduleName.c_str());
     }
     return "";
 }
