@@ -12,7 +12,8 @@
 #import "OpenUDID.h"
 #define MODULE_NAME @"sysmodule"
 
-#define IOS7_EVALUATE_URL  @"itms-apps://itunes.apple.com/app/id%@"
+#define IOS7_EVALUATE_URL  @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=%@&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"
+//#define IOS7_EVALUATE_URL  @"itms-apps://itunes.apple.com/app/id%@"
 #define IOS_EVALUATE_URL   @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@"
 
 @implementation VCTSysModule
