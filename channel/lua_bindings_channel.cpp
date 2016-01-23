@@ -2,7 +2,7 @@
 #include "VCTChannel.h"
 #include "tolua_fix.h"
 #include "LuaBasicConversions.h"
-
+#include "CCLuaEngine.h"
 
 int lua_channel_Channel_Request(lua_State* tolua_S)
 {
@@ -64,13 +64,12 @@ int lua_channel_Channel_Request(lua_State* tolua_S)
         do {
             auto lambda = [callback](const std::basic_string<char> & larg0) -> void {
                 LuaStack *stack = LuaEngine::getInstance()->getLuaStack();
-                stack->pushString(larg0);
+                stack->pushString(larg0.c_str());
                 stack->executeFunctionByHandler(callback, 1);
                 stack->clean();
                 LuaEngine::getInstance()->removeScriptHandler(callback);
             };
             arg3 = lambda;
-			assert(false);
 		} while(0)
 		;
         if(!ok)
