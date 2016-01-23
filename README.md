@@ -2,7 +2,7 @@
 
 VCTOperation是一个适用于coocs2d-x/js/lua引擎的游戏运营框架。<br>
 
-本框架封装了统计调用以及回调接口，能够让你快速从c++/js/lua端调入iOS及android<br>
+本框架封装了统一调用以及回调接口，能够让你快速从c++/js/lua端调入iOS及android<br>
 
 框架中包含了一些常用的平台功能的封装，以及一些常用第三方sdk封装
 # 导入框架
@@ -85,9 +85,9 @@ function(args) {
 -- lua调用原型
 VCT.Channel:Request("模块名", "方法名", "参数", 回调函数)
 -- 回调函数约定，带一个string类型参数
-function(args) {
+function(args)
     ...
-}
+end
 ```
 # 框架简明架构
 ![](https://github.com/ookcode/VCTOperation/raw/master/README/简明架构图.png)
