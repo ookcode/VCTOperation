@@ -24,7 +24,7 @@ LOCAL_C_INCLUDES += channel目录路径
 #include "js_bindings_channel.hpp"
 
 //在AppDelegate.cpp的applicationDidFinishLaunching函数中（在sc->start前）加入
-sc->addRegisterCallback(register_all_js_bindings_channel);
+sc->addRegisterCallback(register_all_channel);
 ```
 
 5、在cocos2d-lua中使用，需注册lua绑定代码，方法如下
@@ -91,5 +91,4 @@ function(args) {
 ```
 # 框架简明架构
 ![](https://github.com/ookcode/VCTOperation/raw/master/README/简明架构图.png)
-
 

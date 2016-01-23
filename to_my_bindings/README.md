@@ -7,6 +7,26 @@
 * 运行lua_bindings.py进行lua绑定
 
 #常见问题
+##lua绑定不支持lambda
+将绑定文件中的
+do {
+	// Lambda binding for lua is not supported.
+	assert(false);
+} while(0)
+修改为
+int callback = toluafix_ref_function(tolua_S,5,0);
+do {
+    auto lambda = [callback](const std::basic_string<char> & larg0) -> void {
+        LuaStack *stack = LuaEngine::getInstance()->getLuaStack();
+        stack->pushString(larg0);
+        stack->executeFunctionByHandler(callback, 1);
+        stack->clean();
+        LuaEngine::getInstance()->removeScriptHandler(callback);
+    };
+    arg3 = lambda;
+} while(0)
+需添加头文件#include "CCLuaEngine.h"
+
 ##os x 10.11下绑定失败
 Exception: can't open libclang.dylib
 解决方案：修改 引擎目录/tools/bindings-generator/clang/cindex.py
@@ -26,4 +46,3 @@ ns_map:
 ---------------------------------------------------------------------------------------
 
 其他参考资料 ：http://www.cocoachina.com/bbs/read.php?tid=196037
-

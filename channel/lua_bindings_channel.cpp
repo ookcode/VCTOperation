@@ -60,8 +60,16 @@ int lua_channel_Channel_Request(lua_State* tolua_S)
         ok &= luaval_to_std_string(tolua_S, 2,&arg0, "VCT.Channel:Request");
         ok &= luaval_to_std_string(tolua_S, 3,&arg1, "VCT.Channel:Request");
         ok &= luaval_to_std_string(tolua_S, 4,&arg2, "VCT.Channel:Request");
+        int callback = toluafix_ref_function(tolua_S,5,0);
         do {
-			// Lambda binding for lua is not supported.
+            auto lambda = [callback](const std::basic_string<char> & larg0) -> void {
+                LuaStack *stack = LuaEngine::getInstance()->getLuaStack();
+                stack->pushString(larg0);
+                stack->executeFunctionByHandler(callback, 1);
+                stack->clean();
+                LuaEngine::getInstance()->removeScriptHandler(callback);
+            };
+            arg3 = lambda;
 			assert(false);
 		} while(0)
 		;
