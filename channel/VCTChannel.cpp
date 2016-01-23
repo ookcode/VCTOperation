@@ -7,16 +7,9 @@
 //
 
 #include "VCTChannel.h"
-USING_NS_CC;
-
-#ifdef COCOS2D_JAVASCRIPT
-#include "ScriptingCore.h"
-#endif
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "VCTCPP2OC.h"
-#elif (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-#include "VCTManager.h"
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #include <jni.h>
 #include "platform/android/jni/JniHelper.h"
@@ -31,17 +24,13 @@ extern"C"
         VCT::Channel::Response(param, cb);
     }
 }
-#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
 #include "VCTManager.h"
 #endif
 
 namespace VCT
 {
-    std::map<std::string, CPP_CALLBACK> Channel::CPP_CALLBACK_MAP;
-    
-#ifdef COCOS2D_JAVASCRIPT
-    std::map<std::string, JS_CALLBACK> Channel::JS_CALLBACK_MAP;
-#endif
+    std::map<std::string, CALLBACK> Channel::CALLBACK_MAP;
     
     std::string ExecRequest(const std::string &moduleName, const std::string &methodName, const std::string &args, const std::string &address)
     {
@@ -50,9 +39,6 @@ namespace VCT
         
         //iOS platform will enter here
         returnvalue = VCTCPP2OC::Request(moduleName, methodName, args, address);
-#elif (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-        
-        //mac platform will enter here
         
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
         
@@ -88,31 +74,14 @@ namespace VCT
             __android_log_print(ANDROID_LOG_INFO, "JNIMsg", "static method 'Request' not found");
             return "0";
         }
-#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
         returnvalue = VCTManager::Request(moduleName, methodName, args, address);
 #endif
         return returnvalue;
     }
-    
-#ifdef COCOS2D_JAVASCRIPT
-    std::string Channel::Request(const std::string &moduleName, const std::string &methodName, const std::string &args, JS_CALLBACK &callback)
-    {
-        std::string address("");
-        //whether the callback is null
-        if (JSVAL_IS_OBJECT_IMPL(JSVAL_TO_IMPL(callback)))
-        {
-            //use the methodName + callback address as the key
-            std::ostringstream os;
-            os << methodName << &callback;
-            address = os.str();
-            JS_CALLBACK_MAP[address] = callback;
-        }
-        std::string result = ExecRequest(moduleName, methodName, args, address);
-        return result;
-    }
-#endif
-    
-    std::string Channel::Request(const std::string &moduleName, const std::string &methodName, const std::string &args, CPP_CALLBACK callback)
+
+
+    std::string Channel::Request(const std::string &moduleName, const std::string &methodName, const std::string &args, CALLBACK callback)
     {
         std::string address("");
         //whether the callback is null
@@ -122,7 +91,7 @@ namespace VCT
             std::ostringstream os;
             os << methodName <<  &callback;
             address = os.str();
-            CPP_CALLBACK_MAP[address] = callback;
+            CALLBACK_MAP[address] = callback;
 
         }
         std::string result = ExecRequest(moduleName, methodName, args, address);
@@ -131,40 +100,14 @@ namespace VCT
     
     void Channel::Response(const std::string& args,const std::string& address)
     {
-        do
-        {
-            //first search in CPP_CALLBACK_MAP
-            auto cpp_iter = CPP_CALLBACK_MAP.find(address);
-            if (cpp_iter != CPP_CALLBACK_MAP.end())
-            {
-                //exec the callback function
-                CPP_CALLBACK callback = (*cpp_iter).second;
-                CPP_CALLBACK_MAP.erase(cpp_iter);
-                callback(args);
-                break;
-            }
-#ifdef COCOS2D_JAVASCRIPT
-            //search in JS_CALLBACK_MAP
-            auto js_iter = JS_CALLBACK_MAP.find(address);
-            if (js_iter != JS_CALLBACK_MAP.end())
-            {
-                //exec the callback function
-                JS_CALLBACK callback = (*js_iter).second;
-                JS_CALLBACK_MAP.erase(js_iter);
-                
-                JSContext *cx = ScriptingCore::getInstance()->getGlobalContext();
-                jsval v[] = {std_string_to_jsval(cx, args)};
-#if (COCOS2D_VERSION < 0x00030500)
-                jsval jsRet;
-                ScriptingCore::getInstance()->executeJSFunctionWithThisObj(JSVAL_NULL, callback, 1,v, &jsRet);
-#else
-                JS::RootedValue jsRet(cx);
-                ScriptingCore::getInstance()->executeJSFunctionWithThisObj(JS::RootedValue(cx, JSVAL_NULL), JS::RootedValue(cx, callback), JS::HandleValueArray::fromMarkedLocation(2, v), &jsRet);
-#endif
-                break;
-            }
-#endif
+        auto cpp_iter = CALLBACK_MAP.find(address);
+        if (cpp_iter != CALLBACK_MAP.end()) {
+            //exec the callback function
+            CALLBACK callback = (*cpp_iter).second;
+            CALLBACK_MAP.erase(cpp_iter);
+            callback(args);
+        } else {
             CCASSERT(false, "callback not found");
-        } while (0);
+        }
     }
 }

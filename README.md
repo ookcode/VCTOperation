@@ -11,10 +11,12 @@ VCTOperation是一个适用于coocs2d-x/js/lua引擎的游戏运营框架。<br>
 2、android工程中：导入仓库目录下的platform_android工程，并关联至android工程中
 
 3、修改android工程jni目录下的Android.mk文件
-	* 将VCTChannel.cpp文件路径加入LOCAL_SRC_FILES
-	* 若是js工程，需将js_bindings_channel.cpp文件路径加入LOCAL_SRC_FILES
-	* 若是lua工程，需将lua_bindings_channel.cpp文件路径加入LOCAL_SRC_FILES
-	* 将channel目录路径加入LOCAL_C_INCLUDES
+```mk
+LOCAL_SRC_FILES += VCTChannel.cpp文件路径
+LOCAL_SRC_FILES += js_bindings_channel.cpp文件路径 #若是js工程
+LOCAL_SRC_FILES += lua_bindings_channel.cpp文件路径 #若是lua工程
+LOCAL_C_INCLUDES += channel目录路径
+```
 
 4、在cocos2d-js中使用，需要注册jsb代码，方法如下
 ```cpp

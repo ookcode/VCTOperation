@@ -1,34 +1,18 @@
-/******************************
- 
- if your engine version is v3.5 or higher
- 
- the SpiderMonkey version is up to v33
- 
- you should use this file in AppDelegate.cpp
- 
- step1. #include "js_bindings_channel.hpp"
- 
- step2. sc->addRegisterCallback(register_all_js_bindings_channel);
- 
- ******************************/
-
-#ifndef __js_bindings_channel_h__
-#define __js_bindings_channel_h__
-
-#ifdef COCOS2D_JAVASCRIPT
+#include "base/ccConfig.h"
+#ifndef __channel_h__
+#define __channel_h__
 
 #include "jsapi.h"
 #include "jsfriendapi.h"
-#include "VCTChannel.h"
-
-#if (COCOS2D_VERSION >= 0x00030500)
 
 extern JSClass  *jsb_VCT_Channel_class;
 extern JSObject *jsb_VCT_Channel_prototype;
-void register_all_js_bindings_channel(JSContext* cx, JS::HandleObject obj);
 
-#endif      //(COCOS2D_VERSION >= 0x00030500)
+bool js_channel_Channel_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_channel_Channel_finalize(JSContext *cx, JSObject *obj);
+void js_register_channel_Channel(JSContext *cx, JS::HandleObject global);
+void register_all_channel(JSContext* cx, JS::HandleObject obj);
+bool js_channel_Channel_Request(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_channel_Channel_Response(JSContext *cx, uint32_t argc, jsval *vp);
 
-#endif      //COCOS2D_JAVASCRIPT
-
-#endif      //__js_bindings_channel_h__
+#endif // __channel_h__
